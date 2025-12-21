@@ -1,0 +1,66 @@
+
+/* default color ?? */
+:root {
+    /* antigos */
+    /* --default-button-color: #2677a6;
+    --disabled-button-color: #bdbdbd;
+    --situacao1-button-color: #26a67b;
+    --default-button-color-background: #20648b;
+    --situacao1-button-color-background: #1c7c73; */
+
+    /* DARKMODE */
+    --darkmode-font-color: #ffffff;
+    --darkmode-font-color-secondary: #c7c7c7;
+    --darkmode-font-color-secondary-transparent: #c7c7c777;
+    --darkmode-bg-color: #171717;
+    --darkmode-bg-color-box: #272727;
+    
+    --darkmode-default-button-color: #1f234b;
+    --darkmode-default-button-color: #322677;
+    --darkmode-default-button-color: rgb(68, 77, 175);
+    --darkmode-default-button-color: rgb(39, 47, 136);
+    --darkmode-default-hover-button-color-background: #2c245a;
+    --darkmode-default-hover-button-color-background: rgb(37, 43, 110);
+
+    --darkmode-dark-button-color: #000000;
+    --darkmode-dark-hover-button-color-background: #303030;
+
+    --darkmode-border-gray: #4b4b4b;
+    --darkmode-border-gray2: #818181;
+
+
+    /* WHITEMODE */
+    --form-border-color: #b8b8b8;
+    --default-button-color: #26a67b;
+    --default-hover-button-color:#109060;
+    --default-button-color-background: #26a67b;
+    --default-hover-button-color-background: #109060;
+
+    --blue-button-color: #2677a6;
+    --blue-hover-button-color:#106090;
+
+    --situacao1-button-color: #235041;
+    --situacao1-button-color-background: #235041;
+
+    --situacao2-button-color: #b93838;
+    --situacao2-button-color-background: #b93838;
+
+    --gray-button-color: #c2c2c2;
+    --gray-button-border: #969696;
+    --gray-button-color-hover: #c2c2c255;
+    
+    --red-button-color: #b93838;
+
+    --offWhite: #eeeeee;
+    --gray1: #b9b9b9;
+    --darkGray: #333333;
+
+    
+    --whitegray: #c2c2c2;
+
+    --prioridade1: #ff0000;
+    --prioridade2: #ff4500;
+    --prioridade3: #ffef00;
+    --prioridade4: #d9ff00;
+    --prioridade5: #cefca4;
+}

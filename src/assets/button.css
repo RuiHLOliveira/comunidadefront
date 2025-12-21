@@ -1,0 +1,419 @@
+
+.cursor-pointer{
+    cursor: pointer;
+}
+.cursor-pointer:hover{
+    filter: brightness(50%);
+}
+
+
+a.btn.btn-icon,
+button.btn.btn-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    padding: 3px 10px;
+}
+
+a.btn.btn-icon-big,
+button.btn.btn-icon-big {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    padding: 3px 10px;
+    .fi{
+        font-size: 1.1rem;
+        padding-top: 4px;
+    }
+}
+
+a.btn.btn-icon-bigger,
+button.btn.btn-icon-bigger {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    padding: 0px 10px;
+    .fi{
+        font-size: 1.5rem;
+        padding-top: 5px;
+    }
+}
+
+a.btn.btn-sm-icon,
+button.btn.btn-sm-icon {
+    padding: 3px 5px;
+}
+
+/* DEFAULT BUTTON */
+a.btn,
+button.btn {
+    text-align: center;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    
+    background-color: var(--darkmode-default-button-color);
+    color: #ffffff;
+
+    /* link */
+    text-decoration: none;
+
+    /* button */
+    border: 0px;
+    font-size: inherit;
+    font-family: inherit;
+    cursor:pointer;
+}
+a.btn:hover,
+button:hover {
+    background-color: var(--darkmode-default-hover-button-color-background);
+}
+
+
+/* DISABLED BUTTON */
+a.btn:disabled,
+button.btn:disabled {
+    background-color: var(--disabled-button-color);
+}
+
+/* CHECKBOX BUTTON */
+a.btn-checkbox,
+button.btn-checkbox {
+    background-color: #00000000;
+    padding: 0;
+    font-size: 1.3rem;
+}
+a.btn-checkbox:hover,
+button.btn-checkbox:hover {
+    background-color: #00000055;
+}
+
+/* BLUE BUTTON */
+a.btn-blue,
+button.btn-blue {
+    background-color: var(--blue-button-color);
+}
+a.btn-blue:hover,
+button.btn-blue:hover {
+    background-color: var(--blue-hover-button-color);
+}
+
+/* RED BUTTON */
+a.btn-red,
+button.btn-red {
+    background-color: var(--red-button-color)
+}
+
+/* CLEAR BUTTON */
+a.btn-clear,
+button.btn-clear {
+    border: 1px solid #575757;
+    background-color: var(--darkmode-dark-button-color);
+    color: var(--darkmode-font-color);
+}
+a.btn-clear:hover,
+button.btn-clear:hover {
+    background-color: var(--darkmode-dark-hover-button-color-background);
+}
+
+
+/* DISCREET BUTTON */
+a.btn-discreet,
+button.btn-discreet {
+    border: 0px;
+    background-color: inherit;
+    color: var(--darkmode-font-color);
+}
+a.btn-clear:hover,
+button.btn-clear:hover {
+    background-color: var(--darkmode-dark-hover-button-color-background);
+}
+
+/* GRAY BUTTON */
+a.btn-gray,
+button.btn-gray {
+    border: 1px solid #eeeeee;
+    background-color: #eeeeee;
+    color: black;
+}
+a.btn-gray:hover,
+button.btn-gray:hover {
+    background-color: #dddddd;
+}
+
+/* CIRCLE BUTTON */
+a.btn-circle,
+button.btn-circle {
+    border-radius: 50%;
+    display:block;
+    height: 40px;
+    width: 40px;
+    line-height:1em;
+}
+
+/* WIDER BUTTON */
+a.btn-wider,
+button.btn-wider {
+    padding: 5px 20px;
+    margin: 5px 10px;
+}
+
+
+
+.btn_atividade_concluida {
+    background-color: var(--situacao1-button-color)
+}
+
+.btn_atividade_concluida:hover {
+    background-color: var(--situacao1-button-color-background)
+}
+
+.btn_atividade_falhou {
+    background-color: var(--situacao2-button-color)
+}
+
+.btn_atividade_falhou:hover {
+    background-color: var(--situacao2-button-color-background)
+}
+
+a.btn.btn-sm,
+button.btn-sm {
+    font-size: 0.9rem;
+    padding: 3px 5px;
+}
+
+
+
+
+
+
+a.btnPrioridade,
+button.btnPrioridade {
+    display: inline;
+    /* border: 1px solid #8d8d8d; */
+}
+
+a.selected,
+button.selected {
+    padding: 10px 5px;
+    outline: 1px #acacac;
+    outline-style: solid;
+    outline-offset: 2px;
+}
+
+a.prioridadeUrgente,
+button.prioridadeUrgente,
+a.prioridadeAlta,
+button.prioridadeAlta,
+a.prioridadeMedia,
+button.prioridadeMedia,
+a.prioridadeBaixa,
+button.prioridadeBaixa,
+a.prioridadeBaixissima,
+button.prioridadeBaixissima,
+a.situacaoPendente,
+button.situacaoPendente,
+a.situacaoAguardandoResposta,
+button.situacaoAguardandoResposta,
+a.situacaoPausado,
+button.situacaoPausado,
+a.situacaoConcluido,
+button.situacaoConcluido {
+    width:      100px;
+    max-width:  100px;
+    min-width:  100px;
+    cursor: text;
+    user-select: text;
+}
+
+
+a.smallPrioridadeUrgente,
+button.smallPrioridadeUrgente,
+a.smallPrioridadeAlta,
+button.smallPrioridadeAlta,
+a.smallPrioridadeMedia,
+button.smallPrioridadeMedia,
+a.smallPrioridadeBaixa,
+button.smallPrioridadeBaixa,
+a.smallPrioridadeBaixissima,
+button.smallPrioridadeBaixissima {
+    width: 25px;
+    cursor: text;
+    user-select: text;
+}
+
+a.smallSituacaoPendente,
+button.smallSituacaoPendente,
+a.smallSituacaoAguardandoResposta,
+button.smallSituacaoAguardandoResposta,
+a.smallSituacaoPausado,
+button.smallSituacaoPausado,
+a.smallSituacaoConcluido,
+button.smallSituacaoConcluido {
+    width: 50px;
+    cursor: text;
+    user-select: text;
+}
+
+
+a.prioridadeUrgente,
+button.prioridadeUrgente,
+a.smallPrioridadeUrgente,
+button.smallPrioridadeUrgente {
+    background-color: rgb(109, 0, 0);
+    background-color: var(--prioridade1);
+}
+a.prioridadeUrgente:hover,
+button.prioridadeUrgente:hover,
+a.smallPrioridadeUrgente:hover,
+button.smallPrioridadeUrgente:hover {
+    background-color: rgb(80, 6, 6);
+    background-color: var(--prioridade1);
+}
+a.prioridadeAlta,
+button.prioridadeAlta,
+a.smallPrioridadeAlta,
+button.smallPrioridadeAlta {
+    background-color: rgb(255, 21, 21);
+    background-color: var(--prioridade2);
+}
+a.prioridadeAlta:hover,
+button.prioridadeAlta:hover,
+a.smallPrioridadeAlta:hover,
+button.smallPrioridadeAlta:hover {
+    background-color: rgb(218, 19, 19);
+    background-color: var(--prioridade2);
+}
+a.prioridadeMedia,
+button.prioridadeMedia,
+a.smallPrioridadeMedia,
+button.smallPrioridadeMedia {
+    background-color: rgb(255, 95, 21);
+    background-color: var(--prioridade3);
+    color: black;
+}
+a.prioridadeMedia:hover,
+button.prioridadeMedia:hover,
+a.smallPrioridadeMedia:hover,
+button.smallPrioridadeMedia:hover {
+    background-color: rgb(214, 80, 18);
+    background-color: var(--prioridade3);
+}
+a.prioridadeBaixa,
+button.prioridadeBaixa,
+a.smallPrioridadeBaixa,
+button.smallPrioridadeBaixa {
+    background-color: rgb(255, 173, 21);
+    background-color: var(--prioridade4);
+    color: #444444;
+    color: black;
+}
+a.prioridadeBaixa:hover,
+button.prioridadeBaixa:hover,
+a.smallPrioridadeBaixa:hover,
+button.smallPrioridadeBaixa:hover {
+    background-color: rgb(224, 153, 19);
+    background-color: var(--prioridade4);
+}
+a.prioridadeBaixissima,
+button.prioridadeBaixissima,
+a.smallPrioridadeBaixissima,
+button.smallPrioridadeBaixissima {
+    background-color: rgb(234, 238, 0);
+    background-color: var(--prioridade5);
+    color: #444444;
+    color: black;
+}
+a.prioridadeBaixissima:hover,
+button.prioridadeBaixissima:hover,
+a.smallPrioridadeBaixissima:hover,
+button.smallPrioridadeBaixissima:hover {
+    background-color: rgb(183, 185, 13);
+    background-color: var(--prioridade5);
+}
+
+a.situacaoPendente,
+button.situacaoPendente,
+a.smallSituacaoPendente,
+button.smallSituacaoPendente {
+    background-color: #20c920;
+
+    background-color: var(--darkmode-bg-color);
+    border: 1px solid #20c920;
+    color: #20c920;
+}
+a.situacaoPendente:hover,
+button.situacaoPendente:hover,
+a.smallSituacaoPendente:hover,
+button.smallSituacaoPendente:hover {
+    background-color: #20c920;
+
+    background-color: var(--darkmode-bg-color);
+    border: 1px solid #20c920;
+    color: #20c920;
+}
+a.situacaoAguardandoResposta,
+button.situacaoAguardandoResposta,
+a.smallSituacaoAguardandoResposta,
+button.smallSituacaoAguardandoResposta {
+    background-color: #0099ff;
+
+    background-color: var(--darkmode-bg-color);
+    border: 1px solid #0099ff;
+    color: #0099ff;
+}
+a.situacaoAguardandoResposta:hover,
+button.situacaoAguardandoResposta:hover,
+a.smallSituacaoAguardandoResposta:hover,
+button.smallSituacaoAguardandoResposta:hover {
+    background-color: #0099ff;
+
+    background-color: var(--darkmode-bg-color);
+    border: 1px solid #0099ff;
+    color: #0099ff;
+}
+a.situacaoPausado,
+button.situacaoPausado,
+a.smallSituacaoPausado,
+button.smallSituacaoPausado {
+    background-color: #575757;
+    
+    background-color: var(--darkmode-bg-color);
+    border: 1px solid #575757;
+    color: #575757;
+}
+a.situacaoPausado:hover,
+button.situacaoPausado:hover,
+a.smallSituacaoPausado:hover,
+button.smallSituacaoPausado:hover {
+    background-color: #757575;
+
+    background-color: var(--darkmode-bg-color);
+    border: 1px solid #575757;
+    color: #575757;
+}
+a.situacaoConcluido,
+button.situacaoConcluido,
+a.smallSituacaoConcluido,
+button.smallSituacaoConcluido {
+    background-color: #d8d8d8;
+    color: #444444;
+    text-decoration: line-through;
+    
+    background-color: var(--darkmode-bg-color);
+    border: 1px solid #8d8d8d;
+    color: #8d8d8d;
+}
+a.situacaoConcluido:hover,
+button.situacaoConcluido:hover,
+a.smallSituacaoConcluido:hover,
+button.smallSituacaoConcluido:hover {
+    background-color: #b1b1b1;
+
+    background-color: var(--darkmode-bg-color);
+    border: 1px solid #8d8d8d;
+    color: #8d8d8d;
+}

@@ -1,0 +1,201 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Sora:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Sora:wght@100..800&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('https://cdn-uicons.flaticon.com/2.5.1/uicons-regular-rounded/css/uicons-regular-rounded.css');
+@import url('https://cdn-uicons.flaticon.com/2.5.1/uicons-regular-straight/css/uicons-regular-straight.css');
+@import url('https://cdn-uicons.flaticon.com/2.5.1/uicons-solid-rounded/css/uicons-solid-rounded.css');
+@import url('https://cdn-uicons.flaticon.com/2.5.1/uicons-solid-straight/css/uicons-solid-straight.css');
+@import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-straight/css/uicons-bold-straight.css');
+@import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css');
+@import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-straight/css/uicons-thin-straight.css');
+@import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-rounded/css/uicons-thin-rounded.css');
+
+
+@import url('./menu.css');
+@import url('./colors.css');
+@import url('./margins-paddings.css');
+@import url('./flexbox.css');
+@import url('./button.css');
+@import url('./shadows.css');
+@import url('./modal.css');
+@import url('./form.css');
+@import url('./border.css');
+@import url('./floatingMenu.css');
+
+@import url('./prioridades.css');
+@import url('./tarefas.css');
+
+@import url('./darkmode.css');
+@import url('./fiIcons.css');
+
+
+* {
+  box-sizing: border-box;
+}
+
+html * {
+    /* font-family: 'Poppins', sans-serif; */
+    /* font-family: 'Work Sans', sans-serif; */
+    /* font-family: 'Inconsolata', sans-serif; */
+    font-family: 'Roboto', sans-serif;
+    /* font-family: 'Ubuntu', sans-serif; */
+    /* font-family: 'Sora', sans-serif; */
+}
+html {
+    font-size: 12pt;
+    padding: 0px;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.displayNone {
+    display: none;
+}
+
+.mainPageDiv {
+    flex-grow: 1;
+}
+@media only screen and (min-width: 800px) {
+    .mainPageDiv {
+        /* para ajustar em relacao ao menu lateral */
+        margin-left: 200px;
+    }
+}
+
+.position_sticky {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.font-weight-bold {
+    font-weight: bold;
+}
+
+.italicoSutil{
+    font-style: italic;
+    color: #757575;
+}
+
+
+.menuButton {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 70;
+    padding: 5px;
+}
+
+.mainBackground {
+    background-color: var(--darkmode-bg-color);
+    min-height: 100svh;
+}
+
+nav.topNav {
+    border-bottom: 1px solid var(--darkmode-border-gray);
+    position: absolute;
+    min-width: 100svw;
+    background-color: #eeeeee;
+    z-index: 60;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5px;
+}
+.containerFullWidth {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 5px 5px;
+}
+
+@media only screen and (min-width: 800px) {
+    .container {
+        padding: 5px;
+    }
+    .containerFullWidth {
+        padding: 5px 20px;
+    }
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+}
+
+.whitespace-pre{
+    white-space: pre-wrap;
+}
+
+section.sectionBorder {
+    border-top: 1px solid var(--darkmode-border-gray);
+    margin-top: 20px;
+    padding-bottom: 20px;
+    /* background-color: beige; */
+}
+
+.textCenter {
+    text-align: center;
+}
+.textAlignCenter {
+    text-align: center;
+}
+.textAlignLeft {
+    text-align: left;
+}
+.textAlignRight {
+    text-align: right;
+}
+
+.diaBox {
+    display:inline-block;
+    width: 150px;
+    text-align: center;
+}
+
+.hora {
+    display:inline-block;
+    width: 25px;
+    /* border: 1px solid black; */
+    text-align: center;
+}
+
+.fixed {
+    position: fixed;
+}
+
+
+.xcenter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.ycenter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.verticalalign-center {
+    vertical-align: middle;
+}
+
+
+
+
+
+
+
+
+

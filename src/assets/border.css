@@ -1,0 +1,16 @@
+.div_border_gray {
+    border: 1px solid var(--darkmode-border-gray);
+    border-radius: 5px;
+}
+
+.div_border_bottom_gray {
+    border-bottom: 1px solid var(--darkmode-border-gray);
+}
+.borderTopGray {
+    border-top: 1px solid var(--darkmode-border-gray);
+}
+
+.div_border_whitegray {
+    border: 1px solid var(--whitegray);
+    border-radius: 5px;
+}

@@ -1,0 +1,31 @@
+
+.fi {
+    background-color: inherit;
+    /* padding-top: 4px; */
+}
+
+.iconBig >.fi{
+    font-size: 1.1rem;
+    padding-top: 4px;
+}
+
+.iconBigger >.fi{
+    font-size: 1.5rem;
+    padding-top: 5px;
+}
+
+.iconBigTarefa {
+    font-size: 1.3rem;
+}
+.check-pendente {
+    font-size: 1.2rem;
+    color: black;
+}
+.check-concluido {
+    font-size: 1.2rem;
+    color: rgb(0, 66, 128);
+}
+.check-falhado {
+    font-size: 1.2rem;
+    color: red;
+}

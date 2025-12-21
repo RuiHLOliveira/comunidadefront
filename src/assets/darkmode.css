@@ -1,0 +1,9 @@
+html, body {
+    background-color: var(--darkmode-bg-color);
+}
+html * {
+    color: var(--darkmode-font-color);
+}
+.darkmodeBgBlack {
+    background-color: var(--darkmode-bg-color);
+}

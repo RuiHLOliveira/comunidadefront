@@ -1,0 +1,57 @@
+
+nav.topNav {
+    border-bottom: 1px solid var(--darkmode-border-gray);
+    position: absolute;
+    min-width: 100svw;
+    background-color: #eeeeee;
+    z-index: 60;
+}
+
+nav.leftNav {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--darkmode-border-gray);
+    min-width: 100svw;
+    max-width: 100svw;
+    min-height: 100svh;
+    max-height: 100svh;
+    background-color: var(--darkmode-bg-color);
+    font-size: 1.1rem;
+    .leftNavTitle {
+        padding: 0 10px;
+        text-align: center;
+        font-size: 1.5rem;
+        color: var(--darkmode-font-color);
+    }
+    .leftNavText {
+        padding: 0 10px;
+        text-align: center;
+        color: var(--darkmode-font-color);
+    }
+    .menuItem {
+        padding: 10px 15px;
+        text-decoration: none;
+        cursor: pointer;
+        color: var(--darkmode-font-color);
+
+        background-color: var(--darkmode-dark-button-color);
+        text-align: center;
+        border-radius: 20px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .menuItem:hover {
+        background-color: var(--darkmode-dark-hover-button-color-background);
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    nav.leftNav {
+        position: fixed;
+        z-index: 10;
+        min-width: 200px;
+        max-width: 200px;
+    }
+}

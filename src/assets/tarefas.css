@@ -1,0 +1,54 @@
+
+.tarefa {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+
+  background-color: #1f1c20;
+  border-radius: 5px;
+}
+
+.projetoNaTarefa {
+    font-size: 0.9rem;
+    border: 1px solid var(--darkmode-border-gray2);
+    border-radius: 5px;
+}
+.data_com_tarefa {
+    font-size: 0.8rem;
+    /* font-family: 'Inconsolata'; */
+}
+.data_com_tarefa_button_gray {
+    font-size: 0.8rem;
+    /* font-family: 'Inconsolata'; */
+    padding: 5px;
+    /* novo estilo */
+    border: 1px solid #eeeeee;
+    background-color: #eeeeee;
+    color: black;
+}
+
+.data_na_tarefa{
+    font-size: 0.8rem;
+  /* font-family: 'Inconsolata'; */
+  border: 1px solid var(--darkmode-border-gray2);
+  border-radius: 5px;
+}
+.descricao_tarefa {
+    border: 1px solid var(--darkmode-border-gray2);
+    border-radius: 5px;
+}
+.motivo_tarefa{
+    border-left: 3px solid var(--darkmode-border-gray2);
+}
+
+
+.clickableTarefa {
+  cursor: pointer;
+}
+.clickableTarefa:hover {
+    background-color: rgba(54, 65, 133, 0.5);
+}
+.tarefaSelected{
+    background-color: rgb(56, 68, 82);
+    background-color: rgba(54, 65, 133, 0.8);
+}

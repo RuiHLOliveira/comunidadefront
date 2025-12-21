@@ -1,0 +1,202 @@
+
+
+label {
+    font-size: 1rem;
+    color: #ffffff;
+    margin-top: 20px;
+}
+
+.inputlikeDiv {
+    color: #ffffff;
+    border: 0px;
+
+    border: 1px solid var(--darkmode-border-gray2);
+    /* border: 2px solid #7da3ce; */
+    padding: 5px;
+    border-radius: 3px;
+}
+
+textarea.textarea-half {
+    font-size: 1rem;
+    font-weight: normal;
+    color: var(--darkmode-font-color);
+    background-color: var(--darkmode-bg-color);
+    border: 1px solid var(--darkmode-border-gray2);
+    padding: 5px;
+    border-radius: 3px;
+    display: inline-block;
+    outline: #8fa0b4;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    overflow-y: visible;
+    width:     50%;
+    min-width: 50%;
+    max-width: 50%;
+}
+textarea.textarea {
+    font-size: 1rem;
+    font-weight: normal;
+    color: var(--darkmode-font-color);
+    background-color: var(--darkmode-bg-color);
+    border: 1px solid var(--darkmode-border-gray2);
+    /* border: 2px solid #7da3ce; */
+    padding: 5px;
+    border-radius: 3px;
+    display: block;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    outline: #8fa0b4;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    overflow-y: visible;
+}
+textarea.textareaHeight150 {
+    height: 150px;
+}
+
+input[type=text].inlineInput,
+input[type=email].inlineInput,
+input[type=time].inlineInput,
+input[type=password].inlineInput,
+input[type=date].inlineInput
+{
+    background-color: var(--darkmode-bg-color);
+    width: inherit;
+    display: inline-block;
+}
+
+input[type=color].inlineInput
+{
+    background-color: var(--darkmode-bg-color);
+    width: 50px;
+    display: inline-block;
+}
+
+input[type=text].normalSizeInput,
+input[type=email].normalSizeInput,
+input[type=time].normalSizeInput,
+input[type=password].normalSizeInput,
+input[type=date].normalSizeInput
+{
+    width: inherit;
+    display: block;
+    background-color: var(--darkmode-bg-color);
+}
+
+input[type=color].normalSizeInput
+{
+    width: 50px;
+    display: block;
+    background-color: var(--darkmode-bg-color);
+}
+
+input[type=text],
+input[type=color],
+input[type=email],
+input[type=time],
+input[type=password],
+input[type=date]
+{
+    background-color: var(--darkmode-bg-color);
+    font-size: 1rem;
+    color: #ffffff;
+    border: 0px;
+
+    border: 1px solid var(--darkmode-border-gray);
+    /* border: 2px solid #7da3ce; */
+    padding: 5px;
+    border-radius: 3px;
+    
+    /* mobile */
+    width: 100%;
+    display: block;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+input[type=text].defaultInput,
+input[type=color].defaultInput,
+input[type=email].defaultInput,
+input[type=time].defaultInput,
+input[type=password].defaultInput,
+input[type=date].defaultInput
+{
+    background-color: var(--darkmode-bg-color);
+    margin-bottom: 20px; /* ajustado */
+}
+
+input[type=text]:focus,
+input[type=color]:focus,
+input[type=time]:focus,
+input[type=email]:focus,
+input[type=password]:focus,
+input[type=date]:focus,
+textarea.textarea:focus {
+    outline: 2px solid #7da3ce;
+    background-color: var(--darkmode-bg-color);
+    /* outline: none; */
+}
+
+input[type=text]:disabled,
+input[type=color]:disabled,
+input[type=time]:disabled,
+input[type=email]:disabled,
+input[type=password]:disabled,
+input[type=date]:disabled,
+textarea.textarea:disabled {
+    color: #696969;
+    background-color: var(--darkmode-bg-color);
+    cursor: not-allowed;
+    /* outline: none; */
+}
+
+
+select.fullSelect {
+    background-color: var(--darkmode-bg-color);
+    font-size: 1rem;
+    color: #ffffff;
+    border: 0px;
+
+    border: 1px solid var(--darkmode-border-gray2);
+    /* border: 2px solid #7da3ce; */
+    padding: 5px;
+    border-radius: 3px;
+    
+    /* mobile */
+    width: 95%;
+    display: block;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+select.fullSelect:focus {
+    outline: 2px solid #7da3ce;
+    /* outline: none; */
+}
+select.fullSelect:disabled {
+    background-color: #cfcfcf;
+    cursor: not-allowed;
+    /* outline: none; */
+}
+
+select.smallSelect {
+    background-color: var(--darkmode-bg-color);
+    font-size: 1rem;
+    color: #ffffff;
+    border: 0px;
+
+    border: 1px solid var(--darkmode-border-gray2);
+    /* border: 2px solid #7da3ce; */
+    padding: 5px;
+    border-radius: 3px;
+    
+    /* mobile */
+    /* width: 95%; */
+    display: block;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+}

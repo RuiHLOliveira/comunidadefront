@@ -19,10 +19,11 @@
               <!-- <i class="fi fi-rs-journal-alt"></i> -->
               <span>Posts</span>
           </router-link>
-          <!-- <router-link v-if="loggedIn" class="menuItem" @click="toggleMenu()" to="/tarefas">
-              <i class="fi fi-rs-list-check"></i> Tarefas
+          <router-link v-if="loggedIn" class="menuItem" @click="toggleMenu()" to="/cursos">
+              <!-- <i class="fi fi-rs-list-check"></i> -->
+              <span>Cursos</span>
           </router-link>
-          <router-link v-if="loggedIn" class="menuItem" @click="toggleMenu()" to="/historicos">
+          <!--  <router-link v-if="loggedIn" class="menuItem" @click="toggleMenu()" to="/historicos">
               <i class="fi fi-rs-list-check"></i> Historicos
           </router-link>
           <router-link v-if="loggedIn" class="menuItem" @click="toggleMenu()" to="/habitTracker">

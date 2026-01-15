@@ -15,4 +15,11 @@ export default {
         }
         return url;
     },
+    getCursoUrl(curso, fullpath = false) {
+        let url = '/cursos/curso/' + curso.id;
+        if(fullpath) {
+            url = config.frontSubfolderUrl + url;
+        }
+        return url;
+    },
 }

@@ -14,10 +14,12 @@ import Invitations from '../views/Invitations.vue'
 import Configuracoes from '../views/Configuracoes.vue'
 import Backup from '../views/Backup.vue'
 import Historicos from '../views/Historicos/Historicos.vue'
-
 import Posts from '../views/Post/Posts.vue'
 import Post from '../views/Post/Post.vue'
 import Criar from '../views/Post/Criar.vue'
+import Cursos from '../views/Curso/Cursos.vue'
+import Curso from '../views/Curso/Curso.vue'
+import CursoCriar from '../views/Curso/CursoCriar.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -30,6 +32,8 @@ const router = createRouter({
     //   // which is lazy-loaded when the route is visited.
     //   component: () => import('../views/AboutView.vue')
     // },
+
+    // POSTS
     {
       path: '/posts',
       name: 'Posts',
@@ -48,6 +52,29 @@ const router = createRouter({
       component: Post,
       props: true
     },
+
+    // CURSOS
+    {
+      path: '/cursos',
+      name: 'Cursos',
+      component: Cursos,
+      props: true
+    },
+    {
+      path: '/cursos/criar',
+      name: 'CursoCriar',
+      component: CursoCriar,
+      props: true
+    },
+    {
+      path: '/cursos/curso/:idCurso',
+      name: 'Post',
+      component: Curso,
+      props: true
+    },
+
+
+
     {
       path: '/inbox',
       name: 'Inbox',

@@ -25,6 +25,15 @@
   min-width: 10%;
 }
 
+.modulo{
+  background-color: rgb(14, 14, 14);
+  padding: 20px 20px;
+  border-radius: 5px;
+  .nomeModulo{
+    font-size: 1.3rem;
+  }
+}
+
 </style>
 
 <template>
@@ -64,9 +73,65 @@
             <section>
               <div class="curso flex-column">
                 <div class="cursoNome">
-                  <h1> {{ curso.nome }} </h1>
+                  <h1 v-if="!editarNomeCurso"> {{ curso.nome }} </h1>
+                  
+                  <div class="cursoNomeEdicao" v-if="editarNomeCurso">
+                    Editar nome do Curso:
+                    <input type="text" name="" id="" v-model="curso.nome" :disabled="busyCursoEditar">
+                    <InlineLoader
+                      :textoAguarde="true"
+                      :busy="busyCursoEditar"
+                      :center="true">
+                    </InlineLoader>
+                  </div>
+
+                  <div v-if="!editarNomeCurso">
+                    <button type="button" class="btn btn-sm mr-20" @click="toggleEditarNome()">
+                      <i class="fi fi-rr-edit"></i> Editar
+                    </button>
+                    <button type="button" class="btn btn-sm" @click="toggleCriarModulo()">
+                      <i class="fi fi-rr-plus"></i> Criar Modulo
+                    </button>
+                  </div>
+                  <div v-if="editarNomeCurso" class="mt-20">
+                    <button type="button" :disabled="busyCursoEditar" class="btn btn-sm mr-20" @click="toggleEditarNome()">
+                      <i class="fi fi-rr-arrow-small-left"></i> Cancelar
+                    </button>
+                    <button type="button" :disabled="busyCursoEditar" class="btn btn-sm" @click="salvarEdicaoNomeCurso()">
+                      <i class="fi fi-rr-disk"></i> Salvar
+                    </button>
+                  </div>
                 </div>
-                <!-- <div class="cursoConteudo whitespace-pre" v-html="curso.conteudoHtml"> </div>-->
+
+                <div v-if="criarModulo">
+                  Nome do Módulo: 
+                  <input type="text" name="" id="" v-model="nomeNovoModulo" :disabled="busyModuloCriar">
+                  <div class="mt-10">
+                    <button type="button" :disabled="busyModuloCriar" class="btn btn-sm mr-20" @click="toggleCriarModulo()">
+                      <i class="fi fi-rr-arrow-small-left"></i> Cancelar
+                    </button>
+                    <button type="button" :disabled="busyModuloCriar" class="btn btn-sm" @click="salvarNovoModulo()">
+                      <i class="fi fi-rr-disk"></i> Salvar
+                    </button>
+                  </div>
+                  <InlineLoader
+                    :textoAguarde="true"
+                    :busy="busyModuloCriar"
+                    :center="true">
+                  </InlineLoader>
+                </div>
+                
+                <div class="mt-20" v-if="modulos != []">
+                  <div v-for="modulo in modulos" class="modulo flex justify-spacebetween alignitens-center">
+                    <div class="nomeModulo">
+                      {{ modulo.nome }}
+                    </div>
+                    <router-link to='/modulos/modulo/x' class="btn ml-15 flex-center-combo"
+                      style="line-height: 0; display: inline-flex;">
+                      <i class="fi fi-rr-folder-open"></i>
+                    </router-link>
+                  </div>
+                </div>
               </div>
             </section>
           </div>
@@ -86,6 +151,7 @@ import Loader from '@/components/Loader.vue';
 import InlineLoader from '@/components/InlineLoader.vue';
 import Notifier from '@/components/Notifier.vue';
 import { CursosStorage } from '@/core/storage/CursosStorage.js'
+import { ModulosStorage } from '@/core/storage/ModulosStorage.js'
 import { ComentariosStorage } from '@/core/storage/ComentariosStorage.js'
 import { MdHtmlConverter } from '@/core/MdHtmlConverter.js'
 import UrlBuilder from '../../core/urlBuilder';
@@ -104,7 +170,16 @@ export default {
       windowHeight: 0,
 
       busyCursosLoad: false,
+      busyCursoEditar: false,
 
+      busyModulosLoad: false,
+      busyModuloCriar: false,
+
+      editarNomeCurso: false,
+      criarModulo: false,
+      nomeNovoModulo: '',
+
+      modulos: [],
       curso: [],
     }
   },
@@ -130,8 +205,41 @@ export default {
     isSameYMD(date1, date2){return DateTime.isSameYMD(date1, date2);},
 
 
-    getCursoUrl(projeto) {
-      return UrlBuilder.getCursoUrl(projeto);
+    getCursoUrl(projeto) { return UrlBuilder.getCursoUrl(projeto); },
+    toggleEditarNome() { this.editarNomeCurso = !this.editarNomeCurso },
+    toggleCriarModulo() { this.criarModulo = !this.criarModulo },
+
+    salvarEdicaoNomeCurso(){
+      this.busyCursoEditar = true;
+      CursosStorage.editar(this.curso)
+      .then(([response, data]) => {
+        this.busyCursoEditar = false;
+        this.$refs.notifier.notify(`Nome do curso atualizado.`)
+        this.toggleEditarNome();
+        this.buscaCurso()
+      })
+      .catch((error) => {
+        this.busyCursoEditar = false;
+        this.$refs.notifier.notify(`Ocorreu um erro: ${error}`, true)
+        console.error(error);
+      });
+    },
+
+    salvarNovoModulo(){
+      this.busyModuloCriar = true;
+      ModulosStorage.criar(this.curso.id, this.nomeNovoModulo)
+      .then(([response, data]) => {
+        this.busyModuloCriar = false;
+        this.$refs.notifier.notify(`Modulo criado.`);
+        this.nomeNovoModulo = '';
+        this.toggleCriarModulo();
+        this.buscaCurso();
+      })
+      .catch((error) => {
+        this.busyModuloCriar = false;
+        this.$refs.notifier.notify(`Ocorreu um erro: ${error}`, true)
+        console.error(error);
+      });
     },
 
     buscaCurso () {
@@ -141,14 +249,27 @@ export default {
         const idCurso = this.$route.params.idCurso
         data = data.filter(c => {return c.id == idCurso});
         console.log({data});
-        // data.forEach(curso => {
-        //   curso.conteudoHtml = MdHtmlConverter.convert(curso.conteudo);
-        // });
         this.curso = data[0];
+        this.buscarModulosDoCurso()
         this.busyCursosLoad = false;
       })
       .catch((error) => {
         this.busyCursosLoad = false;
+        this.$refs.notifier.notify(`Ocorreu um erro: ${error}`, true)
+        console.error(error);
+      });
+    },
+
+    buscarModulosDoCurso () {
+      this.busyModulosLoad = true;
+      ModulosStorage.index(this.curso.id)
+      .then(([response, data]) => {
+        console.log({data});
+        this.modulos = data;
+        this.busyModulosLoad = false;
+      })
+      .catch((error) => {
+        this.busyModulosLoad = false;
         this.$refs.notifier.notify(`Ocorreu um erro: ${error}`, true)
         console.error(error);
       });

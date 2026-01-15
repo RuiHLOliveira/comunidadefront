@@ -145,8 +145,8 @@
                 <div class="postNome">
                   <h1> {{ post.nome }} </h1>
                 </div>
-                <div class="postConteudo whitespace-pre" v-html="post.conteudoHtml">
-                </div>
+                <div class="postConteudo whitespace-pre" v-html="post.introducaoHtml"></div>
+                <div class="postConteudo whitespace-pre" v-html="post.conteudoHtml"></div>
               </div>
             </section>
             
@@ -427,6 +427,7 @@ export default {
         data = data.filter(p => {return p.id == idPost});
         console.log({data});
         data.forEach(post => {
+          post.introducaoHtml = MdHtmlConverter.convert(post.introducao);
           post.conteudoHtml = MdHtmlConverter.convert(post.conteudo);
         });
         this.post = data[0];

@@ -95,6 +95,7 @@ export const PostsStorage = reactive({
         const headers = new Headers({'Content-Type': 'application/json'})
         const body = {
             'nome': post.nome,
+            'introducao': post.introducao,
             'conteudo': post.conteudo,
         };
         let requestData = {

@@ -173,10 +173,10 @@ export default {
       // Italic
       html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
       html = html.replace(/_(.*?)_/g, '<em>$1</em>');
-      // Links
-      html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
       // Images
       html = html.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1">');
+      // Links
+      html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
       // Code inline
       html = html.replace(/`(.*?)`/g, '<code>$1</code>');
       // Code blocks

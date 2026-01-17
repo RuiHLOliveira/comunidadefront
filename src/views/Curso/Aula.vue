@@ -1,15 +1,15 @@
 <style scoped>
 
-.modulo {
+.aula {
   background-color: var(--darkmode-bg-color-box);
   padding: 20px;
   margin-top: 40px;
 }
-.moduloNome{
+.aulaNome{
   margin-bottom: 20px;
   text-align: center;
 }
-.moduloConteudo{
+.aulaConteudo{
   /* height:     100px;
   max-height: 100px;
   overflow-y: hidden; */
@@ -25,11 +25,11 @@
   min-width: 10%;
 }
 
-.aula{
+.filho{
   background-color: rgb(14, 14, 14);
   padding: 20px 20px;
   border-radius: 5px;
-  .nomeAula{
+  .nomeFilho{
     font-size: 1.3rem;
   }
 }
@@ -46,7 +46,7 @@
           <div class="flex alignitens-center">
             <h1>Bem vindo de volta, mentorado!</h1>
             <div>
-              <router-link :to='getCursoUrl()' class="btn ml-15 mr-10 my-5 flex-center-combo" style="display: inline-flex;">
+              <router-link :to='getModuloUrl()' class="btn ml-15 mr-10 my-5 flex-center-combo" style="display: inline-flex;">
                 <i class="fi fi-rr-arrow-small-left"></i>
                 <span class="ml-5">Voltar</span>
               </router-link>
@@ -61,43 +61,44 @@
 
       <div>
 
-          <div class="my-5 py-5" v-if="busyModulosLoad">
+          <div class="my-5 py-5" v-if="busyAulasLoad">
             <InlineLoader
               :textoAguarde="true"
-              :busy="busyModulosLoad"
+              :busy="busyAulasLoad"
               :center="true">
             </InlineLoader>
           </div>
 
-          <div v-if="modulo != [] && !busyModulosLoad">
+          <div v-if="aula != [] && !busyAulasLoad">
             <section>
-              <div class="modulo flex-column">
-                <div class="moduloNome">
-                  <h1 v-if="!editarNomeModulo"> {{ modulo.nome }} </h1>
+              <div class="aula flex-column">
+                <div class="aulaNome">
+                  <h1 v-if="!editarNomeAula"> {{ aula.nome }} </h1>
                   
-                  <div class="moduloNomeEdicao" v-if="editarNomeModulo">
-                    Editar nome do Modulo:
-                    <input type="text" name="" id="" v-model="modulo.nome" :disabled="busyModuloEditar">
+                  <div class="aulaNomeEdicao" v-if="editarNomeAula">
+                    Editar nome do Aula:
+                    <input type="text" name="" id="" v-model="aula.nome" :disabled="busyAulaEditar">
+                    <input type="text" name="" id="" v-model="aula.url" :disabled="busyAulaEditar">
                     <InlineLoader
                       :textoAguarde="true"
-                      :busy="busyModuloEditar"
+                      :busy="busyAulaEditar"
                       :center="true">
                     </InlineLoader>
                   </div>
 
-                  <div v-if="!editarNomeModulo">
+                  <div v-if="!editarNomeAula">
                     <button type="button" class="btn btn-sm mr-20" @click="toggleEditarNome()">
                       <i class="fi fi-rr-edit"></i> Editar
                     </button>
-                    <button type="button" class="btn btn-sm" @click="toggleCriarAula()">
-                      <i class="fi fi-rr-plus"></i> Criar Aula
+                    <button type="button" class="btn btn-sm" @click="toggleCriarFilho()">
+                      <i class="fi fi-rr-plus"></i> Criar Filho
                     </button>
                   </div>
-                  <div v-if="editarNomeModulo" class="mt-20">
-                    <button type="button" :disabled="busyModuloEditar" class="btn btn-sm mr-20" @click="toggleEditarNome()">
+                  <div v-if="editarNomeAula" class="mt-20">
+                    <button type="button" :disabled="busyAulaEditar" class="btn btn-sm mr-20" @click="toggleEditarNome()">
                       <i class="fi fi-rr-arrow-small-left"></i> Cancelar
                     </button>
-                    <button type="button" :disabled="busyModuloEditar" class="btn btn-sm" @click="salvarEdicaoNomeModulo()">
+                    <button type="button" :disabled="busyAulaEditar" class="btn btn-sm" @click="salvarEdicaoNomeAula()">
                       <i class="fi fi-rr-disk"></i> Salvar
                     </button>
                   </div>
@@ -105,34 +106,29 @@
 
                 <InlineLoader
                   :textoAguarde="true"
-                  :busy="busyAulaCriar || busyAulasLoad"
+                  :busy="busyFilhoCriar || busyFilhosLoad"
                   :center="true">
                 </InlineLoader>
 
-                <div v-if="criarAula">
+                <div v-if="criarFilho">
                   Nome do Módulo: 
-                  <input type="text" name="" id="" v-model="nomeNovoAula" :disabled="busyAulaCriar">
-                  <input type="text" name="" id="" v-model="urlNovoAula" :disabled="busyAulaCriar">
+                  <input type="text" name="" id="" v-model="nomeNovoFilho" :disabled="busyFilhoCriar">
+                  <input type="text" name="" id="" v-model="urlNovoFilho" :disabled="busyFilhoCriar">
                   <div class="mt-10">
-                    <button type="button" :disabled="busyAulaCriar" class="btn btn-sm mr-20" @click="toggleCriarAula()">
+                    <button type="button" :disabled="busyFilhoCriar" class="btn btn-sm mr-20" @click="toggleCriarFilho()">
                       <i class="fi fi-rr-arrow-small-left"></i> Cancelar
                     </button>
-                    <button type="button" :disabled="busyAulaCriar" class="btn btn-sm" @click="salvarNovoAula()">
+                    <!-- <button type="button" :disabled="busyFilhoCriar" class="btn btn-sm" @click="salvarNovoFilho()">
                       <i class="fi fi-rr-disk"></i> Salvar
-                    </button>
+                    </button> -->
                   </div>
                 </div>
-
-                <div class="mt-20" v-if="aulas != []">
-                  <div v-for="aula in aulas" class="aula flex justify-spacebetween alignitens-center">
-                    <div class="nomeAula">
-                      {{ aula.nome }}
-                    </div>
-                    <router-link :to='getAulaUrl(aula)' class="btn ml-15 flex-center-combo"
-                      style="line-height: 0; display: inline-flex;">
-                      <i class="fi fi-rr-folder-open"></i>
-                    </router-link>
-                  </div>
+                
+                <div class="mt-20">
+                  <iframe width="560" height="315" :src='aula.url'
+                      :title='aula.nome' frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
               </div>
             </section>
@@ -152,8 +148,8 @@ import DateTime from '@/core/DateTime.js'
 import Loader from '@/components/Loader.vue';
 import InlineLoader from '@/components/InlineLoader.vue';
 import Notifier from '@/components/Notifier.vue';
-import { ModulosStorage } from '@/core/storage/ModulosStorage.js'
 import { AulasStorage } from '@/core/storage/AulasStorage.js'
+// import { FilhosStorage } from '@/core/storage/FilhosStorage.js'
 import { ComentariosStorage } from '@/core/storage/ComentariosStorage.js'
 import { MdHtmlConverter } from '@/core/MdHtmlConverter.js'
 import UrlBuilder from '../../core/urlBuilder';
@@ -172,19 +168,23 @@ export default {
       windowWidth: 0,
       windowHeight: 0,
 
-      busyModulosLoad: false,
-      busyModuloEditar: false,
-
       busyAulasLoad: false,
-      busyAulaCriar: false,
+      busyAulaEditar: false,
 
-      editarNomeModulo: false,
-      criarAula: false,
-      nomeNovoAula: '',
-      urlNovoAula: '',
+      busyFilhosLoad: false,
+      busyFilhoCriar: false,
 
-      aulas: [],
-      modulo: [],
+      editarNomeAula: false,
+      criarFilho: false,
+      nomeNovoFilho: '',
+      urlNovoFilho: '',
+
+      idCurso: null,
+      idModulo: null,
+      idAula: null,
+
+      filhos: [],
+      aula: [],
     }
   },
   computed: {
@@ -208,46 +208,45 @@ export default {
     newDatetimeTz(dateString){return DateTime.newDatetimeTz(dateString);},
     isSameYMD(date1, date2){return DateTime.isSameYMD(date1, date2);},
 
-    getCursoUrl() { return urlBuilder.getCursoUrl({'id':this.getIdCurso()}); },
-    getModuloUrl(modulo) { return UrlBuilder.getModuloUrl(modulo); },
-    getAulaUrl(aula) { console.log('aula get aula url', aula);return UrlBuilder.getAulaUrl(aula); },
+    getModuloUrl() { const obj = {'id':this.getIdModulo(), 'curso': {'id': this.getIdCurso()}}; console.log('obj',obj); return urlBuilder.getModuloUrl(obj); },
+    getAulaUrl(projeto) { return UrlBuilder.getAulaUrl(projeto); },
+    
+    toggleEditarNome() { this.editarNomeAula = !this.editarNomeAula },
+    toggleCriarFilho() { this.criarFilho = !this.criarFilho },
 
-    toggleEditarNome() { this.editarNomeModulo = !this.editarNomeModulo },
-    toggleCriarAula() { this.criarAula = !this.criarAula },
-
-    salvarEdicaoNomeModulo(){
-      this.busyModuloEditar = true;
-      ModulosStorage.editar(this.getIdCurso(), this.modulo.id, this.modulo.nome)
+    salvarEdicaoNomeAula(){
+      this.busyAulaEditar = true;
+      AulasStorage.editar(this.getIdModulo(), this.aula.id, this.aula.nome, this.aula.url)
       .then(([response, data]) => {
-        this.busyModuloEditar = false;
-        this.$refs.notifier.notify(`Nome do modulo atualizado.`)
+        this.busyAulaEditar = false;
+        this.$refs.notifier.notify(`Nome do aula atualizado.`)
         this.toggleEditarNome();
-        this.buscarModulo()
+        this.buscarAula()
       })
       .catch((error) => {
-        this.busyModuloEditar = false;
+        this.busyAulaEditar = false;
         this.$refs.notifier.notify(`Ocorreu um erro: ${error}`, true)
         console.error(error);
       });
     },
 
-    salvarNovoAula(){
-      this.busyAulaCriar = true;
-      AulasStorage.criar(this.modulo.id, this.nomeNovoAula, this.urlNovoAula)
-      .then(([response, data]) => {
-        this.busyAulaCriar = false;
-        this.$refs.notifier.notify(`Aula criado.`);
-        this.nomeNovoAula = '';
-        this.urlNovoAula = '';
-        this.toggleCriarAula();
-        this.buscarModulo();
-      })
-      .catch((error) => {
-        this.busyAulaCriar = false;
-        this.$refs.notifier.notify(`Ocorreu um erro: ${error}`, true)
-        console.error(error);
-      });
-    },
+    // salvarNovoFilho(){
+    //   this.busyFilhoCriar = true;
+    //   FilhosStorage.criar(this.aula.id, this.nomeNovoFilho, this.urlNovoFilho)
+    //   .then(([response, data]) => {
+    //     this.busyFilhoCriar = false;
+    //     this.$refs.notifier.notify(`Filho criado.`);
+    //     this.nomeNovoFilho = '';
+    //     this.urlNovoFilho = '';
+    //     this.toggleCriarFilho();
+    //     this.buscarAula();
+    //   })
+    //   .catch((error) => {
+    //     this.busyFilhoCriar = false;
+    //     this.$refs.notifier.notify(`Ocorreu um erro: ${error}`, true)
+    //     console.error(error);
+    //   });
+    // },
 
     getIdCurso () {
       if(this.idCurso == null) {
@@ -255,38 +254,45 @@ export default {
       }
       return this.idCurso;
     },
+    getIdModulo () {
+      if(this.idModulo == null) {
+        this.idModulo = this.$route.query.idModulo
+      }
+      return this.idModulo;
+    },
 
-    buscarModulo () {
-      this.busyModulosLoad = true;
-      ModulosStorage.index(this.getIdCurso())
+    buscarAula () {
+      this.busyAulasLoad = true;
+      AulasStorage.index(this.getIdModulo())
       .then(([response, data]) => {
-        const idModulo = this.$route.params.idModulo
-        data = data.filter(c => {return c.id == idModulo});
+        const idAula = this.$route.params.idAula
+        data = data.filter(c => {return c.id == idAula});
         console.log({data});
-        this.modulo = data[0];
-        this.buscarAulasDoModulo()
-        this.busyModulosLoad = false;
+        this.aula = data[0];
+        this.buscarFilhosDoAula()
+        this.busyAulasLoad = false;
       })
       .catch((error) => {
-        this.busyModulosLoad = false;
+        this.busyAulasLoad = false;
         this.$refs.notifier.notify(`Ocorreu um erro: ${error}`, true)
         console.error(error);
       });
     },
 
-    buscarAulasDoModulo () {
-      this.busyAulasLoad = true;
-      AulasStorage.index(this.modulo.id)
-      .then(([response, data]) => {
-        console.log({data});
-        this.aulas = data;
-        this.busyAulasLoad = false;
-      })
-      .catch((error) => {
-        this.busyAulasLoad = false;
-        this.$refs.notifier.notify(`Ocorreu um erro: ${error}`, true)
-        console.error(error);
-      });
+    buscarFilhosDoAula () {
+      return;
+      // this.busyFilhosLoad = true;
+      // FilhosStorage.index(this.aula.id)
+      // .then(([response, data]) => {
+      //   console.log({data});
+      //   this.filhos = data;
+      //   this.busyFilhosLoad = false;
+      // })
+      // .catch((error) => {
+      //   this.busyFilhosLoad = false;
+      //   this.$refs.notifier.notify(`Ocorreu um erro: ${error}`, true)
+      //   console.error(error);
+      // });
     },
     
     getDimensions() {
@@ -310,7 +316,7 @@ export default {
     window.removeEventListener('resize', this.getDimensions);
   },
   created () {
-    this.buscarModulo(true);
+    this.buscarAula(true);
     // this.buscaTags();
   },
 }

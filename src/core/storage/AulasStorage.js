@@ -46,7 +46,7 @@ export const AulasStorage = reactive({
         });
     },
     
-    editar(idAula, nomeAula, urlLinkAula) {
+    editar(idModulo, idAula, nomeAula, urlLinkAula) {
         return new Promise((resolve, reject) => {
             this.apiEditar(idAula, nomeAula, urlLinkAula)
             .then(([response,data]) => {

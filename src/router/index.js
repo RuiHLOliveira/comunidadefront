@@ -21,6 +21,7 @@ import Cursos from '../views/Curso/Cursos.vue'
 import Curso from '../views/Curso/Curso.vue'
 import CursoCriar from '../views/Curso/CursoCriar.vue'
 import Modulo from '../views/Curso/Modulo.vue'
+import Aula from '../views/Curso/Aula.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -79,6 +80,14 @@ const router = createRouter({
       path: '/modulos/modulo/:idModulo',
       name: 'Modulo',
       component: Modulo,
+      props: true
+    },
+
+    // AULA
+    {
+      path: '/aulas/aula/:idAula',
+      name: 'Aula',
+      component: Aula,
       props: true
     },
 

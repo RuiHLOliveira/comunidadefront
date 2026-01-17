@@ -1,4 +1,5 @@
 import config from "./config";
+import QueryStringConverter from '@/core/QueryStringConverter.js';
 
 export default {
     getPostUrl(projeto, fullpath = false) {
@@ -23,10 +24,19 @@ export default {
         return url;
     },
     getModuloUrl(modulo, fullpath = false) {
-        console.log('getModuloUrlmodulo',modulo)
-        const url = '/modulos/modulo/';
-        const querystring = '?idCurso='+modulo.curso.id;
-        return this.defaultGetUrl(url, modulo.id, fullpath)+querystring
+        let params = {
+            'idCurso': modulo.curso.id
+        }
+        params = QueryStringConverter.toQueryString(params, true);
+        return this.defaultGetUrl('/modulos/modulo/', modulo.id, fullpath) + params
+    },
+    getAulaUrl(aula, fullpath = false) {
+        let params = {
+            'idCurso': aula.modulo.curso.id,
+            'idModulo': aula.modulo.id
+        }
+        params = QueryStringConverter.toQueryString(params, true);
+        return this.defaultGetUrl('/aulas/aula/', aula.id, fullpath) + params
     },
     defaultGetUrl(url, id, fullpath = false) {
         let newUrl = url + id;

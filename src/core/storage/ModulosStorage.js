@@ -8,14 +8,27 @@ export const ModulosStorage = reactive({
     modulos: [],
     forceNextReload: [],
 
+    debugReloadParams(name, idCurso){
+        console.log(`[${name}] modulos`,this.modulos)
+        if(this.modulos[idCurso]){
+            console.log(`[modulo] modulos idCurso`,this.modulos[idCurso])
+        }
+        console.log(`[modulo] forceNextReload`, this.forceNextReload)
+        if(this.forceNextReload[idCurso]){
+            console.log(`[modulo] forceNextReload idCurso`, this.forceNextReload[idCurso])
+        }
+    },
+
     // funcionalidades de storage
     index(idCurso){
         return new Promise((resolve, reject) => {
-            console.log('this.forceNextReload',this.forceNextReload[idCurso])
+            const name = 'modulos';
+            this.debugReloadParams(name, idCurso);
             if(this.modulos[idCurso] != undefined && this.modulos[idCurso].length > 0 && !this.forceNextReload[idCurso]) {
+                console.log(`[${name}] loadFromCache`)
                 resolve([null,this.modulos[idCurso]]);
             } else {
-                console.log('loadFromApi')
+                console.log(`[${name}] loadFromApi`)
                 this.loadFromApi(idCurso, resolve, reject);
             }
         });
@@ -54,7 +67,7 @@ export const ModulosStorage = reactive({
     loadFromApi(idCurso, resolve, reject) {
         this.apiLoad(idCurso).then(([response,data]) => {
             this.modulos[idCurso] = data
-            this.forceNextReload[idCurso] = true;
+            this.forceNextReload[idCurso] = false;
             resolve([response,data]);
         }).catch((error) => {
             reject(error)

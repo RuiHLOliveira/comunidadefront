@@ -103,6 +103,12 @@
                   </div>
                 </div>
 
+                <InlineLoader
+                  :textoAguarde="true"
+                  :busy="busyModuloCriar || busyModulosLoad"
+                  :center="true">
+                </InlineLoader>
+
                 <div v-if="criarModulo">
                   Nome do Módulo: 
                   <input type="text" name="" id="" v-model="nomeNovoModulo" :disabled="busyModuloCriar">
@@ -114,13 +120,8 @@
                       <i class="fi fi-rr-disk"></i> Salvar
                     </button>
                   </div>
-                  <InlineLoader
-                    :textoAguarde="true"
-                    :busy="busyModuloCriar"
-                    :center="true">
-                  </InlineLoader>
                 </div>
-                
+
                 <div class="mt-20" v-if="modulos != []">
                   <div v-for="modulo in modulos" class="modulo flex justify-spacebetween alignitens-center">
                     <div class="nomeModulo">

@@ -3,42 +3,42 @@ import config from '@/core/config.js'
 import QueryStringConverter from '@/core/QueryStringConverter.js';
 import { reactive } from 'vue';
 
-export const ModulosStorage = reactive({
+export const AulasStorage = reactive({
     
-    modulos: [],
+    aulas: [],
     forceNextReload: [],
 
-    debugReloadParams(name, idCurso){
-        console.log(`[${name}] modulos`,this.modulos)
-        if(this.modulos[idCurso]){
-            console.log(`[modulo] modulos idCurso`,this.modulos[idCurso])
+    debugReloadParams(name, idModulo){
+        console.log(`[${name}] aulas`,this.aulas)
+        if(this.aulas[idModulo]){
+            console.log(`[aula] aulas idModulo`,this.aulas[idModulo])
         }
-        console.log(`[modulo] forceNextReload`, this.forceNextReload)
-        if(this.forceNextReload[idCurso]){
-            console.log(`[modulo] forceNextReload idCurso`, this.forceNextReload[idCurso])
+        console.log(`[aula] forceNextReload`, this.forceNextReload)
+        if(this.forceNextReload[idModulo]){
+            console.log(`[aula] forceNextReload idModulo`, this.forceNextReload[idModulo])
         }
     },
 
     // funcionalidades de storage
-    index(idCurso){
+    index(idModulo){
         return new Promise((resolve, reject) => {
-            const name = 'modulos';
-            this.debugReloadParams(name, idCurso);
-            if(this.modulos[idCurso] != undefined && this.modulos[idCurso].length > 0 && !this.forceNextReload[idCurso]) {
+            const name = 'aulas';
+            this.debugReloadParams(name, idModulo);
+            if(this.aulas[idModulo] != undefined && this.aulas[idModulo].length > 0 && !this.forceNextReload[idModulo]) {
                 console.log(`[${name}] loadFromCache`)
-                resolve([null,this.modulos[idCurso]]);
+                resolve([null,this.aulas[idModulo]]);
             } else {
                 console.log(`[${name}] loadFromApi`)
-                this.loadFromApi(idCurso, resolve, reject);
+                this.loadFromApi(idModulo, resolve, reject);
             }
         });
     },
 
-    criar(idCurso, nomeModulo) {
+    criar(idModulo, nomeAula, urlLinkAula) {
         return new Promise((resolve, reject) => {
-            this.apiCriar(idCurso, nomeModulo)
+            this.apiCriar(idModulo, nomeAula, urlLinkAula)
             .then(([response,data]) => {
-                this.forceNextReload[idCurso] = true;
+                this.forceNextReload[idModulo] = true;
                 resolve([response,data]);
             }).catch((error) => {
                 reject(error)
@@ -46,11 +46,11 @@ export const ModulosStorage = reactive({
         });
     },
     
-    editar(idCurso, idModulo, nomeModulo) {
+    editar(idAula, nomeAula, urlLinkAula) {
         return new Promise((resolve, reject) => {
-            this.apiEditar(idModulo, nomeModulo)
+            this.apiEditar(idAula, nomeAula, urlLinkAula)
             .then(([response,data]) => {
-                this.forceNextReload[idCurso] = true;
+                this.forceNextReload[idModulo] = true;
                 resolve([response,data]);
             }).catch((error) => {
                 reject(error)
@@ -58,16 +58,10 @@ export const ModulosStorage = reactive({
         });
     },
 
-    // substituir(curso) {
-    //     if(this.cursos == null || this.cursos.length == 0) return;
-    //     const index = this.cursos.findIndex(e => e.id === curso.id);
-    //     this.cursos[index] = curso;
-    // },
-
-    loadFromApi(idCurso, resolve, reject) {
-        this.apiLoad(idCurso).then(([response,data]) => {
-            this.modulos[idCurso] = data
-            this.forceNextReload[idCurso] = false;
+    loadFromApi(idModulo, resolve, reject) {
+        this.apiLoad(idModulo).then(([response,data]) => {
+            this.aulas[idModulo] = data
+            this.forceNextReload[idModulo] = false;
             resolve([response,data]);
         }).catch((error) => {
             reject(error)
@@ -75,25 +69,26 @@ export const ModulosStorage = reactive({
     },
 
     // funcionalidades de api
-    apiLoad(idCurso) {
+    apiLoad(idModulo) {
         let params = {
             'relations': '',
             'orderBy': 'created_at,asc',
-            'curso': idCurso
+            'modulo': idModulo
         };
         params = QueryStringConverter.toQueryString(params, true);
         let requestData = {
-            'url': `${config.serverUrl}/modulos${params}`,
+            'url': `${config.serverUrl}/aulas${params}`,
         };
         return Request.fetch(requestData)
     },
 
-    apiCriar(idCurso, nome) {
-        const url = `${config.serverUrl}/modulos`
+    apiCriar(idModulo, nomeAula, urlLinkAula) {
+        const url = `${config.serverUrl}/aulas`
         const headers = new Headers({'Content-Type': 'application/json'})
         const body = {
-            'curso': idCurso,
-            'nome': nome
+            'modulo': idModulo,
+            'nome': nomeAula,
+            'url': urlLinkAula
         };
         let requestData = {
             'url': url,
@@ -104,11 +99,12 @@ export const ModulosStorage = reactive({
         return Request.fetch(requestData);
     },
 
-    apiEditar(idModulo, nome) {
-        const url = `${config.serverUrl}/modulos/${idModulo}`
+    apiEditar(idAula, nomeAula, urlLinkAula) {
+        const url = `${config.serverUrl}/aulas/${idAula}`
         const headers = new Headers({'Content-Type': 'application/json'})
         const body = {
-            'nome': nome,
+            'nome': nomeAula,
+            'url': urlLinkAula
         };
         let requestData = {
             'url': url,

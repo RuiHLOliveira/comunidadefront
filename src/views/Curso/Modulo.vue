@@ -1,15 +1,15 @@
 <style scoped>
 
-.curso {
+.modulo {
   background-color: var(--darkmode-bg-color-box);
   padding: 20px;
   margin-top: 40px;
 }
-.cursoNome{
+.moduloNome{
   margin-bottom: 20px;
   text-align: center;
 }
-.cursoConteudo{
+.moduloConteudo{
   /* height:     100px;
   max-height: 100px;
   overflow-y: hidden; */
@@ -25,11 +25,11 @@
   min-width: 10%;
 }
 
-.modulo{
+.aula{
   background-color: rgb(14, 14, 14);
   padding: 20px 20px;
   border-radius: 5px;
-  .nomeModulo{
+  .nomeAula{
     font-size: 1.3rem;
   }
 }
@@ -46,7 +46,7 @@
           <div class="flex alignitens-center">
             <h1>Bem vindo de volta, mentorado!</h1>
             <div>
-              <router-link to='/cursos' class="btn ml-15 mr-10 my-5 flex-center-combo" style="display: inline-flex;">
+              <router-link :to='getCursoUrl()' class="btn ml-15 mr-10 my-5 flex-center-combo" style="display: inline-flex;">
                 <i class="fi fi-rr-arrow-small-left"></i>
                 <span class="ml-5">Voltar</span>
               </router-link>
@@ -61,43 +61,43 @@
 
       <div>
 
-          <div class="my-5 py-5" v-if="busyCursosLoad">
+          <div class="my-5 py-5" v-if="busyModulosLoad">
             <InlineLoader
               :textoAguarde="true"
-              :busy="busyCursosLoad"
+              :busy="busyModulosLoad"
               :center="true">
             </InlineLoader>
           </div>
 
-          <div v-if="curso != [] && !busyCursosLoad">
+          <div v-if="modulo != [] && !busyModulosLoad">
             <section>
-              <div class="curso flex-column">
-                <div class="cursoNome">
-                  <h1 v-if="!editarNomeCurso"> {{ curso.nome }} </h1>
+              <div class="modulo flex-column">
+                <div class="moduloNome">
+                  <h1 v-if="!editarNomeModulo"> {{ modulo.nome }} </h1>
                   
-                  <div class="cursoNomeEdicao" v-if="editarNomeCurso">
-                    Editar nome do Curso:
-                    <input type="text" name="" id="" v-model="curso.nome" :disabled="busyCursoEditar">
+                  <div class="moduloNomeEdicao" v-if="editarNomeModulo">
+                    Editar nome do Modulo:
+                    <input type="text" name="" id="" v-model="modulo.nome" :disabled="busyModuloEditar">
                     <InlineLoader
                       :textoAguarde="true"
-                      :busy="busyCursoEditar"
+                      :busy="busyModuloEditar"
                       :center="true">
                     </InlineLoader>
                   </div>
 
-                  <div v-if="!editarNomeCurso">
+                  <div v-if="!editarNomeModulo">
                     <button type="button" class="btn btn-sm mr-20" @click="toggleEditarNome()">
                       <i class="fi fi-rr-edit"></i> Editar
                     </button>
-                    <button type="button" class="btn btn-sm" @click="toggleCriarModulo()">
-                      <i class="fi fi-rr-plus"></i> Criar Modulo
+                    <button type="button" class="btn btn-sm" @click="toggleCriarAula()">
+                      <i class="fi fi-rr-plus"></i> Criar Aula
                     </button>
                   </div>
-                  <div v-if="editarNomeCurso" class="mt-20">
-                    <button type="button" :disabled="busyCursoEditar" class="btn btn-sm mr-20" @click="toggleEditarNome()">
+                  <div v-if="editarNomeModulo" class="mt-20">
+                    <button type="button" :disabled="busyModuloEditar" class="btn btn-sm mr-20" @click="toggleEditarNome()">
                       <i class="fi fi-rr-arrow-small-left"></i> Cancelar
                     </button>
-                    <button type="button" :disabled="busyCursoEditar" class="btn btn-sm" @click="salvarEdicaoNomeCurso()">
+                    <button type="button" :disabled="busyModuloEditar" class="btn btn-sm" @click="salvarEdicaoNomeModulo()">
                       <i class="fi fi-rr-disk"></i> Salvar
                     </button>
                   </div>
@@ -105,29 +105,30 @@
 
                 <InlineLoader
                   :textoAguarde="true"
-                  :busy="busyModuloCriar || busyModulosLoad"
+                  :busy="busyAulaCriar || busyAulasLoad"
                   :center="true">
                 </InlineLoader>
 
-                <div v-if="criarModulo">
+                <div v-if="criarAula">
                   Nome do Módulo: 
-                  <input type="text" name="" id="" v-model="nomeNovoModulo" :disabled="busyModuloCriar">
+                  <input type="text" name="" id="" v-model="nomeNovoAula" :disabled="busyAulaCriar">
+                  <input type="text" name="" id="" v-model="urlNovoAula" :disabled="busyAulaCriar">
                   <div class="mt-10">
-                    <button type="button" :disabled="busyModuloCriar" class="btn btn-sm mr-20" @click="toggleCriarModulo()">
+                    <button type="button" :disabled="busyAulaCriar" class="btn btn-sm mr-20" @click="toggleCriarAula()">
                       <i class="fi fi-rr-arrow-small-left"></i> Cancelar
                     </button>
-                    <button type="button" :disabled="busyModuloCriar" class="btn btn-sm" @click="salvarNovoModulo()">
+                    <button type="button" :disabled="busyAulaCriar" class="btn btn-sm" @click="salvarNovoAula()">
                       <i class="fi fi-rr-disk"></i> Salvar
                     </button>
                   </div>
                 </div>
 
-                <div class="mt-20" v-if="modulos != []">
-                  <div v-for="modulo in modulos" class="modulo flex justify-spacebetween alignitens-center">
-                    <div class="nomeModulo">
-                      {{ modulo.nome }}
+                <div class="mt-20" v-if="aulas != []">
+                  <div v-for="aula in aulas" class="aula flex justify-spacebetween alignitens-center">
+                    <div class="nomeAula">
+                      {{ aula.nome }} - {{ aula.url }}
                     </div>
-                    <router-link :to='getModuloUrl(modulo)' class="btn ml-15 flex-center-combo"
+                    <router-link to='/aulas/aula/x' class="btn ml-15 flex-center-combo"
                       style="line-height: 0; display: inline-flex;">
                       <i class="fi fi-rr-folder-open"></i>
                     </router-link>
@@ -151,11 +152,12 @@ import DateTime from '@/core/DateTime.js'
 import Loader from '@/components/Loader.vue';
 import InlineLoader from '@/components/InlineLoader.vue';
 import Notifier from '@/components/Notifier.vue';
-import { CursosStorage } from '@/core/storage/CursosStorage.js'
 import { ModulosStorage } from '@/core/storage/ModulosStorage.js'
+import { AulasStorage } from '@/core/storage/AulasStorage.js'
 import { ComentariosStorage } from '@/core/storage/ComentariosStorage.js'
 import { MdHtmlConverter } from '@/core/MdHtmlConverter.js'
 import UrlBuilder from '../../core/urlBuilder';
+import urlBuilder from '../../core/urlBuilder';
 
 export default {
   name: 'HabitTracker',
@@ -170,18 +172,19 @@ export default {
       windowWidth: 0,
       windowHeight: 0,
 
-      busyCursosLoad: false,
-      busyCursoEditar: false,
-
       busyModulosLoad: false,
-      busyModuloCriar: false,
+      busyModuloEditar: false,
 
-      editarNomeCurso: false,
-      criarModulo: false,
-      nomeNovoModulo: '',
+      busyAulasLoad: false,
+      busyAulaCriar: false,
 
-      modulos: [],
-      curso: [],
+      editarNomeModulo: false,
+      criarAula: false,
+      nomeNovoAula: '',
+      urlNovoAula: '',
+
+      aulas: [],
+      modulo: [],
     }
   },
   computed: {
@@ -205,72 +208,81 @@ export default {
     newDatetimeTz(dateString){return DateTime.newDatetimeTz(dateString);},
     isSameYMD(date1, date2){return DateTime.isSameYMD(date1, date2);},
 
+    getCursoUrl() { return urlBuilder.getCursoUrl({'id':this.getIdCurso()}); },
+    getModuloUrl(projeto) { return UrlBuilder.getModuloUrl(projeto); },
+    
+    toggleEditarNome() { this.editarNomeModulo = !this.editarNomeModulo },
+    toggleCriarAula() { this.criarAula = !this.criarAula },
 
-    getModuloUrl(modulo) { return UrlBuilder.getModuloUrl(modulo); },
-    toggleEditarNome() { this.editarNomeCurso = !this.editarNomeCurso },
-    toggleCriarModulo() { this.criarModulo = !this.criarModulo },
-
-    salvarEdicaoNomeCurso(){
-      this.busyCursoEditar = true;
-      CursosStorage.editar(this.curso)
+    salvarEdicaoNomeModulo(){
+      this.busyModuloEditar = true;
+      ModulosStorage.editar(this.getIdCurso(), this.modulo.id, this.modulo.nome)
       .then(([response, data]) => {
-        this.busyCursoEditar = false;
-        this.$refs.notifier.notify(`Nome do curso atualizado.`)
+        this.busyModuloEditar = false;
+        this.$refs.notifier.notify(`Nome do modulo atualizado.`)
         this.toggleEditarNome();
-        this.buscaCurso()
+        this.buscarModulo()
       })
       .catch((error) => {
-        this.busyCursoEditar = false;
+        this.busyModuloEditar = false;
         this.$refs.notifier.notify(`Ocorreu um erro: ${error}`, true)
         console.error(error);
       });
     },
 
-    salvarNovoModulo(){
-      this.busyModuloCriar = true;
-      ModulosStorage.criar(this.curso.id, this.nomeNovoModulo)
+    salvarNovoAula(){
+      this.busyAulaCriar = true;
+      AulasStorage.criar(this.modulo.id, this.nomeNovoAula, this.urlNovoAula)
       .then(([response, data]) => {
-        this.busyModuloCriar = false;
-        this.$refs.notifier.notify(`Modulo criado.`);
-        this.nomeNovoModulo = '';
-        this.toggleCriarModulo();
-        this.buscaCurso();
+        this.busyAulaCriar = false;
+        this.$refs.notifier.notify(`Aula criado.`);
+        this.nomeNovoAula = '';
+        this.urlNovoAula = '';
+        this.toggleCriarAula();
+        this.buscarModulo();
       })
       .catch((error) => {
-        this.busyModuloCriar = false;
+        this.busyAulaCriar = false;
         this.$refs.notifier.notify(`Ocorreu um erro: ${error}`, true)
         console.error(error);
       });
     },
 
-    buscaCurso () {
-      this.busyCursosLoad = true;
-      CursosStorage.index()
-      .then(([response, data]) => {
-        const idCurso = this.$route.params.idCurso
-        data = data.filter(c => {return c.id == idCurso});
-        console.log({data});
-        this.curso = data[0];
-        this.buscarModulosDoCurso()
-        this.busyCursosLoad = false;
-      })
-      .catch((error) => {
-        this.busyCursosLoad = false;
-        this.$refs.notifier.notify(`Ocorreu um erro: ${error}`, true)
-        console.error(error);
-      });
+    getIdCurso () {
+      if(this.idCurso == null) {
+        this.idCurso = this.$route.query.idCurso
+      }
+      return this.idCurso;
     },
 
-    buscarModulosDoCurso () {
+    buscarModulo () {
       this.busyModulosLoad = true;
-      ModulosStorage.index(this.curso.id)
+      ModulosStorage.index(this.getIdCurso())
       .then(([response, data]) => {
+        const idModulo = this.$route.params.idModulo
+        data = data.filter(c => {return c.id == idModulo});
         console.log({data});
-        this.modulos = data;
+        this.modulo = data[0];
+        this.buscarAulasDoModulo()
         this.busyModulosLoad = false;
       })
       .catch((error) => {
         this.busyModulosLoad = false;
+        this.$refs.notifier.notify(`Ocorreu um erro: ${error}`, true)
+        console.error(error);
+      });
+    },
+
+    buscarAulasDoModulo () {
+      this.busyAulasLoad = true;
+      AulasStorage.index(this.modulo.id)
+      .then(([response, data]) => {
+        console.log({data});
+        this.aulas = data;
+        this.busyAulasLoad = false;
+      })
+      .catch((error) => {
+        this.busyAulasLoad = false;
         this.$refs.notifier.notify(`Ocorreu um erro: ${error}`, true)
         console.error(error);
       });
@@ -297,7 +309,7 @@ export default {
     window.removeEventListener('resize', this.getDimensions);
   },
   created () {
-    this.buscaCurso(true);
+    this.buscarModulo(true);
     // this.buscaTags();
   },
 }

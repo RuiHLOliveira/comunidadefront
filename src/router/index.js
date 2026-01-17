@@ -20,6 +20,7 @@ import Criar from '../views/Post/Criar.vue'
 import Cursos from '../views/Curso/Cursos.vue'
 import Curso from '../views/Curso/Curso.vue'
 import CursoCriar from '../views/Curso/CursoCriar.vue'
+import Modulo from '../views/Curso/Modulo.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -68,12 +69,18 @@ const router = createRouter({
     },
     {
       path: '/cursos/curso/:idCurso',
-      name: 'Post',
+      name: 'Curso',
       component: Curso,
       props: true
     },
 
-
+    // MODULO
+    {
+      path: '/modulos/modulo/:idModulo',
+      name: 'Modulo',
+      component: Modulo,
+      props: true
+    },
 
     {
       path: '/inbox',

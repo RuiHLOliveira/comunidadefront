@@ -1,13 +1,16 @@
 <style scoped>
 
+.breadcrumbs{
+  background-color: var(--darkmode-bg-color);
+  padding: 5px 5px;
+  border-radius: 5px;
+}
 .curso {
   background-color: var(--darkmode-bg-color-box);
   padding: 20px;
-  margin-top: 40px;
 }
 .cursoNome{
   margin-bottom: 20px;
-  text-align: center;
 }
 .cursoConteudo{
   /* height:     100px;
@@ -40,17 +43,11 @@
   <div>
     <div class="container">
 
-      <div class="position_sticky py-10 div_border_bottom_gray darkmodeBgBlack">
+      <div class="position_sticky py-10 darkmodeBgBlack">
         <!-- HEADER -->
         <section class="my-5 py-5 px-10 flex justify-spacebetween alignitens-center">
           <div class="flex alignitens-center">
             <h1>Bem vindo de volta, mentorado!</h1>
-            <div>
-              <router-link to='/cursos' class="btn ml-15 mr-10 my-5 flex-center-combo" style="display: inline-flex;">
-                <i class="fi fi-rr-arrow-small-left"></i>
-                <span class="ml-5">Voltar</span>
-              </router-link>
-            </div>
           </div>
           <div>
             lateral
@@ -72,20 +69,29 @@
           <div v-if="curso != [] && !busyCursosLoad">
             <section>
               <div class="curso flex-column">
-                <div class="cursoNome">
-                  <h1 v-if="!editarNomeCurso"> {{ curso.nome }} </h1>
-                  
-                  <div class="cursoNomeEdicao" v-if="editarNomeCurso">
-                    Editar nome do Curso:
-                    <input type="text" name="" id="" v-model="curso.nome" :disabled="busyCursoEditar">
-                    <InlineLoader
-                      :textoAguarde="true"
-                      :busy="busyCursoEditar"
-                      :center="true">
-                    </InlineLoader>
-                  </div>
+                <div class="mb-20">
+                  <span class="breadcrumbs">
+                    <router-link to='/cursos'>Cursos</router-link>
+                    >
+                    {{ curso.nome }}
+                  </span>
+                </div>
 
-                  <div v-if="!editarNomeCurso">
+                <div class="cursoNome flex justify-spacebetween alignitens-center" v-if="!editarNomeCurso">
+                  <!-- NOME DO CURSO -->
+                  <div class="flex alignitens-center">
+                    <!-- <div>
+                      <router-link to='/cursos' class="btn btn-sm mr-10 my-5 flex-center-combo" style="display: inline-flex;">
+                        <i class="fi fi-rr-arrow-small-left"></i>
+                        <span class="ml-5">Voltar</span>
+                      </router-link>
+                    </div> -->
+                    <h1>
+                      {{ curso.nome }}
+                    </h1>
+                  </div>
+                  <!-- BOTOES DO CURSO -->
+                  <div>
                     <button type="button" class="btn btn-sm mr-20" @click="toggleEditarNome()">
                       <i class="fi fi-rr-edit"></i> Editar
                     </button>
@@ -93,7 +99,13 @@
                       <i class="fi fi-rr-plus"></i> Criar Modulo
                     </button>
                   </div>
-                  <div v-if="editarNomeCurso" class="mt-20">
+                </div>
+
+                <!-- EDIÇÃO DO NOME DO CURSO -->
+                <div class="cursoNomeEdicao" v-if="editarNomeCurso">
+                  Editar nome do Curso:
+                  <input type="text" name="" id="" v-model="curso.nome" :disabled="busyCursoEditar">
+                  <div class="mt-20">
                     <button type="button" :disabled="busyCursoEditar" class="btn btn-sm mr-20" @click="toggleEditarNome()">
                       <i class="fi fi-rr-arrow-small-left"></i> Cancelar
                     </button>
@@ -101,6 +113,11 @@
                       <i class="fi fi-rr-disk"></i> Salvar
                     </button>
                   </div>
+                  <InlineLoader
+                    :textoAguarde="true"
+                    :busy="busyCursoEditar"
+                    :center="true">
+                  </InlineLoader>
                 </div>
 
                 <InlineLoader
@@ -109,6 +126,7 @@
                   :center="true">
                 </InlineLoader>
 
+                <!-- CRIAR MODULO -->
                 <div v-if="criarModulo">
                   Nome do Módulo: 
                   <input type="text" name="" id="" v-model="nomeNovoModulo" :disabled="busyModuloCriar">

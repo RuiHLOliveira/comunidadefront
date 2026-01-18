@@ -1,13 +1,16 @@
 <style scoped>
 
+.breadcrumbs{
+  background-color: var(--darkmode-bg-color);
+  padding: 5px 5px;
+  border-radius: 5px;
+}
 .aula {
   background-color: var(--darkmode-bg-color-box);
   padding: 20px;
-  margin-top: 40px;
 }
 .aulaNome{
   margin-bottom: 20px;
-  text-align: center;
 }
 .aulaConteudo{
   /* height:     100px;
@@ -34,23 +37,23 @@
   }
 }
 
+.iframe-aula{
+  width: 100%;
+  aspect-ratio: 16 / 9; /* Mantém a proporção padrão do YouTube */
+  height: auto;
+}
+
 </style>
 
 <template>
   <div>
     <div class="container">
 
-      <div class="position_sticky py-10 div_border_bottom_gray darkmodeBgBlack">
+      <div class="position_sticky py-10 darkmodeBgBlack">
         <!-- HEADER -->
         <section class="my-5 py-5 px-10 flex justify-spacebetween alignitens-center">
           <div class="flex alignitens-center">
             <h1>Bem vindo de volta, mentorado!</h1>
-            <div>
-              <router-link :to='getModuloUrl()' class="btn ml-15 mr-10 my-5 flex-center-combo" style="display: inline-flex;">
-                <i class="fi fi-rr-arrow-small-left"></i>
-                <span class="ml-5">Voltar</span>
-              </router-link>
-            </div>
           </div>
           <div>
             lateral
@@ -72,21 +75,36 @@
           <div v-if="aula != [] && !busyAulasLoad">
             <section>
               <div class="aula flex-column">
-                <div class="aulaNome">
-                  <h1 v-if="!editarNomeAula"> {{ aula.nome }} </h1>
-                  
-                  <div class="aulaNomeEdicao" v-if="editarNomeAula">
-                    Editar nome do Aula:
-                    <input type="text" name="" id="" v-model="aula.nome" :disabled="busyAulaEditar">
-                    <input type="text" name="" id="" v-model="aula.url" :disabled="busyAulaEditar">
-                    <InlineLoader
-                      :textoAguarde="true"
-                      :busy="busyAulaEditar"
-                      :center="true">
-                    </InlineLoader>
-                  </div>
+                
+                <div class="mb-20">
+                  <span class="breadcrumbs">
+                    Cursos
+                    > 
+                    <router-link :to='getCursoUrl()'>
+                      {{ aula.modulo.curso.nome }}
+                    </router-link>
+                    >
+                    <router-link :to='getModuloUrl()'>
+                      {{ aula.modulo.nome }}
+                    </router-link>
+                  </span>
+                </div>
 
-                  <div v-if="!editarNomeAula">
+                <div class="aulaNome flex justify-spacebetween alignitens-center" v-if="!editarNomeAula">
+                  <!-- NOME DA AULA -->
+                  <div class="flex alignitens-center">
+                    <!-- <div>
+                      <router-link :to='getModuloUrl()' class="btn btn-sm mr-10 my-5 flex-center-combo" style="display: inline-flex;">
+                        <i class="fi fi-rr-arrow-small-left"></i>
+                        <span class="ml-5">Voltar</span>
+                      </router-link>
+                    </div> -->
+                    <h1>
+                      {{ aula.nome }}
+                    </h1>
+                  </div>
+                  <!-- BOTOES DA AULA -->
+                  <div>
                     <button type="button" class="btn btn-sm mr-20" @click="toggleEditarNome()">
                       <i class="fi fi-rr-edit"></i> Editar
                     </button>
@@ -94,6 +112,13 @@
                       <i class="fi fi-rr-plus"></i> Criar Filho
                     </button>
                   </div>
+                </div>
+                
+                <!-- EDIÇÃO DO NOME DA AULA -->
+                <div class="aulaNomeEdicao" v-if="editarNomeAula">
+                  Editar nome do Aula:
+                  <input type="text" name="" id="" v-model="aula.nome" :disabled="busyAulaEditar">
+                  <input type="text" name="" id="" v-model="aula.url" :disabled="busyAulaEditar">
                   <div v-if="editarNomeAula" class="mt-20">
                     <button type="button" :disabled="busyAulaEditar" class="btn btn-sm mr-20" @click="toggleEditarNome()">
                       <i class="fi fi-rr-arrow-small-left"></i> Cancelar
@@ -102,6 +127,11 @@
                       <i class="fi fi-rr-disk"></i> Salvar
                     </button>
                   </div>
+                  <InlineLoader
+                    :textoAguarde="true"
+                    :busy="busyAulaEditar"
+                    :center="true">
+                  </InlineLoader>
                 </div>
 
                 <InlineLoader
@@ -110,22 +140,9 @@
                   :center="true">
                 </InlineLoader>
 
-                <div v-if="criarFilho">
-                  Nome do Módulo: 
-                  <input type="text" name="" id="" v-model="nomeNovoFilho" :disabled="busyFilhoCriar">
-                  <input type="text" name="" id="" v-model="urlNovoFilho" :disabled="busyFilhoCriar">
-                  <div class="mt-10">
-                    <button type="button" :disabled="busyFilhoCriar" class="btn btn-sm mr-20" @click="toggleCriarFilho()">
-                      <i class="fi fi-rr-arrow-small-left"></i> Cancelar
-                    </button>
-                    <!-- <button type="button" :disabled="busyFilhoCriar" class="btn btn-sm" @click="salvarNovoFilho()">
-                      <i class="fi fi-rr-disk"></i> Salvar
-                    </button> -->
-                  </div>
-                </div>
                 
                 <div class="mt-20">
-                  <iframe width="560" height="315" :src='aula.url'
+                  <iframe class="iframe-aula" :src='aula.url'
                       :title='aula.nome' frameborder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -208,7 +225,8 @@ export default {
     newDatetimeTz(dateString){return DateTime.newDatetimeTz(dateString);},
     isSameYMD(date1, date2){return DateTime.isSameYMD(date1, date2);},
 
-    getModuloUrl() { const obj = {'id':this.getIdModulo(), 'curso': {'id': this.getIdCurso()}}; console.log('obj',obj); return urlBuilder.getModuloUrl(obj); },
+    getCursoUrl() { return urlBuilder.getCursoUrl({'id':this.getIdCurso()}); },
+    getModuloUrl() { return urlBuilder.getModuloUrl({'id':this.getIdModulo(), 'curso': {'id': this.getIdCurso()}}); },
     getAulaUrl(projeto) { return UrlBuilder.getAulaUrl(projeto); },
     
     toggleEditarNome() { this.editarNomeAula = !this.editarNomeAula },

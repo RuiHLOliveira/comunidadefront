@@ -16,7 +16,7 @@
   <div>
     <div class="container">
 
-      <div class="position_sticky py-10 div_border_bottom_gray darkmodeBgBlack">
+      <div class="py-10 div_border_bottom_gray darkmodeBgBlack">
         <!-- HEADER -->
         <section class="my-5 py-5 px-10 flex justify-spacebetween alignitens-center">
           <div class="flex alignitens-center">

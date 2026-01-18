@@ -3,11 +3,16 @@
 .post {
   background-color: var(--darkmode-bg-color-box);
   padding: 20px;
-  margin-top: 40px;
+  max-width: 400px;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+.postNomeBox {
+  text-align: center;
+  border-bottom: 1px solid var(--darkmode-border-gray);
 }
 .postNome{
-  margin-bottom: 20px;
-  text-align: center;
+  font-size: 1.1rem;
 }
 .postConteudo{
   height:     100px;
@@ -15,14 +20,14 @@
   overflow-y: hidden;
 }
 .comentariosBox {
-  border-top: 2px solid var(--darkmode-border-gray);
+  border-top: 1px solid var(--darkmode-border-gray);
   margin-top: 20px;
   padding-top: 20px;
 }
 .verMaisBox {
-  border-top: 2px solid var(--darkmode-border-gray);
-  margin-top: 20px;
-  padding-top: 20px;
+  border-top: 1px solid var(--darkmode-border-gray);
+  margin-top: 10px;
+  padding-top: 10px;
 }
 
 </style>
@@ -31,7 +36,7 @@
   <div>
     <div class="container">
 
-      <div class="position_sticky py-10 div_border_bottom_gray darkmodeBgBlack">
+      <div class="py-10 darkmodeBgBlack">
         <!-- HEADER -->
         <section class="my-5 py-5 px-10 flex justify-spacebetween alignitens-center">
           <div class="flex alignitens-center">
@@ -44,7 +49,7 @@
             </div>
           </div>
           <div>
-            ???
+            <!-- ??? -->
           </div>
         </section>
 
@@ -57,15 +62,15 @@
 
             <div v-for="post in posts" :key="post.id">
               <div class="post flex-column">
-                <div class="postNome">
-                  <h1> {{ post.nome }} </h1>
+                <div class="postNomeBox pb-5 mb-20 ">
+                  <span class="postNome"> {{ post.nome }} </span>
                 </div>
                 <div class="postConteudo whitespace-pre" v-html="post.introducaoHtml">
                 </div>
-                <div class="verMaisBox">
-                  <router-link :to='getPostUrl(post)' class="btn flex-center-combo" style="line-height: 0; display: inline-flex;">
+                <div class="verMaisBox flex justify-end">
+                  <router-link :to='getPostUrl(post)' class="btn btn-sm flex-center-combo" style="line-height: 0; display: inline-flex;">
+                    <span class="mr-5">Ver Mais</span>
                     <i class="fi fi-rr-arrow-right"></i>
-                    <span class="ml-5">Ver Mais</span>
                   </router-link>
                 </div>
               </div>

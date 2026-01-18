@@ -1,3 +1,15 @@
+<style>
+.titulo-comunidade {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.img-rui {
+  width: 40px;
+  border-radius: 50%;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+</style>
 <template>
   <div id="app">
 
@@ -12,8 +24,12 @@
 
       <div class="flex-column">
 
-        <nav class="leftNav shadow-1" v-if="loggedIn && (!isSmallScreen || showMenu)">
-          <span class="leftNavTitle my-15">Comunidade<br>Rui Dev</span>
+        <nav class="leftNav shadow-1 position_sticky" v-if="loggedIn && (!isSmallScreen || showMenu)">
+          <div class="leftNavTitle my-15 flex">
+            <span class="titulo-comunidade">Comunidade<br>Rui Dev</span>
+            <img class="img-rui" src="https://res.cloudinary.com/dbp56iwln/image/upload/v1768669797/foto_perfil_vh0luh.jpg" alt="">
+          </div>
+          
           <!-- <span class="leftNavText my-15">Olá, usuario!</span> -->
           <div class="flex justify-spacebetween flex-grow-1">
             <div>

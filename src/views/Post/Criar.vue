@@ -40,14 +40,15 @@
       </div>
 
       <div>
-        <section class="pt-20">
-          <div class="my-5 py-5" v-if="busyPostSave">
-            <InlineLoader
-              :textoAguarde="true"
-              :busy="busyPostSave"
-              :center="true">
-            </InlineLoader>
-          </div>
+        <div class="my-5 py-5" v-if="busyPostsLoad">
+          <InlineLoader
+            :textoAguarde="true"
+            :busy="busyPostsLoad"
+            :center="true">
+          </InlineLoader>
+        </div>
+
+        <section class="pt-20" v-if="!busyPostsLoad">
 
           <label for="nome">Título:</label>
           <input name="nome" type="text" placeholder="Título" v-model="nome">
@@ -104,10 +105,15 @@ export default {
       windowHeight: 0,
 
       busyPostSave: false,
+      busyPostsLoad: false,
 
       nome: '',
       conteudo: '',
       introducao: '',
+
+      idPost: null,
+      editMode: false,
+      postToEdit: [],
 
     }
   },
@@ -138,14 +144,68 @@ export default {
     newDatetimeTz(dateString){return DateTime.newDatetimeTz(dateString);},
     isSameYMD(date1, date2){return DateTime.isSameYMD(date1, date2);},
 
+    getIdPost(){
+      if(this.idPost == null) {
+        this.idPost = this.$route.query.idPost;
+      }
+      return this.idPost
+    },
+
+    getPostToEdit(){
+      if(this.getIdPost() == null) return;
+      this.editMode = true;
+      this.busyPostsLoad = true;
+      PostsStorage.index()
+      .then(([response, data]) => {
+        const idPost = this.getIdPost()
+        data = data.filter(p => {return p.id == idPost});
+        console.log({data});
+        this.postToEdit = data[0];
+        this.nome = this.postToEdit.nome;
+        this.conteudo = this.postToEdit.conteudo;
+        this.introducao = this.postToEdit.introducao;
+        this.busyPostsLoad = false;
+      })
+      .catch((error) => {
+        this.busyPostsLoad = false;
+        this.$refs.notifier.notify(`Ocorreu um erro: ${error}`, true)
+        console.error(error);
+      });
+      
+    },
+
     salvarRascunho () {
-      this.busyPostSave = true;
       let post = {
         'nome': this.nome,
         'introducao': this.introducao,
         'conteudo': this.conteudo
       };
+      if(this.getIdPost() == null) {
+        this.criar(post);
+      } else {
+        post['id'] = this.getIdPost();
+        this.editar(post);
+      }
+    },
+
+    criar (post) {
+      this.busyPostSave = true;
       PostsStorage.criar(post)
+      .then(([response, data]) => {
+        console.log({data});
+        this.$refs.notifier.notify(`Post salvo!`);
+        this.busyPostSave = false;
+      })
+      .catch((error) => {
+        this.busyPostSave = false;
+        this.$refs.notifier.notify(`Ocorreu um erro: ${error}`, true)
+        console.error(error);
+      });
+    },
+
+    editar (post) {
+      this.busyPostSave = true;
+      PostsStorage.editar(post)
       .then(([response, data]) => {
         console.log({data});
         this.$refs.notifier.notify(`Post salvo!`);
@@ -225,6 +285,7 @@ export default {
     window.removeEventListener('resize', this.getDimensions);
   },
   created () {
+    this.getPostToEdit();
   },
 }
 </script>

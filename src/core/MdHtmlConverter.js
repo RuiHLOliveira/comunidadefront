@@ -17,7 +17,7 @@ export const MdHtmlConverter = reactive({
       html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
       html = html.replace(/_(.*?)_/g, '<em>$1</em>');
       // Images
-      html = html.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1">');
+      html = html.replace(/!\[(.*?)\]\((.*?)\)/g, '<img class="imgPost" src="$2" alt="$1">');
       // Links
       html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
       // Code inline

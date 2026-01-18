@@ -90,7 +90,6 @@ export const CursosStorage = reactive({
     },
 
     apiCriar(curso) {
-        debugger
         const url = `${config.serverUrl}/cursos`
         const headers = new Headers({'Content-Type': 'application/json'})
         const body = {

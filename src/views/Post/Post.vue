@@ -13,7 +13,14 @@
   /* height:     100px;
   max-height: 100px;
   overflow-y: hidden; */
+  width: 100%;
 }
+
+.postConteudo :deep(.imgPost) {
+  max-width: 600px;
+  max-height: 300px;
+}
+
 .comentariosTitle {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -144,6 +151,12 @@
               <div class="post flex-column">
                 <div class="postNome">
                   <h1> {{ post.nome }} </h1>
+                  <div>
+                    <router-link :to='getEditPostUrl(post)' class="btn brn-sm flex-center-combo" style="line-height: 0; display: inline-flex;">
+                      <i class="fi fi-rr-edit"></i>
+                      <span class="ml-5">Editar</span>
+                    </router-link>
+                  </div>
                 </div>
                 <div class="postConteudo whitespace-pre" v-html="post.introducaoHtml"></div>
                 <div class="postConteudo whitespace-pre" v-html="post.conteudoHtml"></div>
@@ -306,6 +319,12 @@ export default {
     newDatetimeTz(dateString){return DateTime.newDatetimeTz(dateString);},
     isSameYMD(date1, date2){return DateTime.isSameYMD(date1, date2);},
 
+
+    getEditPostUrl() {
+      const url = '/posts/criar?idPost='+this.post.id
+      console.log('DEBUG', url)
+      return url;
+    },
 
     toggleResponseComentario(comentario) {
       

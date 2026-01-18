@@ -78,6 +78,8 @@ export const PostsStorage = reactive({
         const url = `${config.serverUrl}/posts/${post.id}`
         const headers = new Headers({'Content-Type': 'application/json'})
         const body = {
+            'nome': post.nome,
+            'introducao': post.introducao,
             'conteudo': post.conteudo,
         };
         let requestData = {
@@ -90,7 +92,7 @@ export const PostsStorage = reactive({
     },
 
     apiCriar(post) {
-        debugger
+        debuggerx
         const url = `${config.serverUrl}/posts`
         const headers = new Headers({'Content-Type': 'application/json'})
         const body = {

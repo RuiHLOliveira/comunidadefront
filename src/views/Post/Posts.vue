@@ -60,7 +60,7 @@
                 <div class="postNome">
                   <h1> {{ post.nome }} </h1>
                 </div>
-                <div class="postConteudo whitespace-pre" v-html="post.conteudoHtml">
+                <div class="postConteudo whitespace-pre" v-html="post.introducaoHtml">
                 </div>
                 <div class="verMaisBox">
                   <router-link :to='getPostUrl(post)' class="btn flex-center-combo" style="line-height: 0; display: inline-flex;">
@@ -148,6 +148,7 @@ export default {
       .then(([response, data]) => {
         console.log({data});
         data.forEach(post => {
+          post.introducaoHtml = MdHtmlConverter.convert(post.introducao);
           post.conteudoHtml = MdHtmlConverter.convert(post.conteudo);
         });
         this.posts = data

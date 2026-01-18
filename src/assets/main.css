@@ -65,7 +65,7 @@ body {
 @media only screen and (min-width: 800px) {
     .mainPageDiv {
         /* para ajustar em relacao ao menu lateral */
-        margin-left: 200px;
+        /* margin-left: 200px; */
     }
 }
 
@@ -99,13 +99,6 @@ body {
     min-height: 100svh;
 }
 
-nav.topNav {
-    border-bottom: 1px solid var(--darkmode-border-gray);
-    position: absolute;
-    min-width: 100svw;
-    background-color: #eeeeee;
-    z-index: 60;
-}
 
 .container {
     max-width: 900px;

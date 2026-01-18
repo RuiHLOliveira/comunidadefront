@@ -10,41 +10,37 @@
         </button>
       </div>
 
-      <div class="flex">
+      <div class="flex-column">
 
         <nav class="leftNav shadow-1" v-if="loggedIn && (!isSmallScreen || showMenu)">
           <span class="leftNavTitle my-15">Comunidade<br>Rui Dev</span>
-          <span class="leftNavText my-15">Olá, usuario!</span>
-          <router-link v-if="loggedIn" class="menuItem" @click="toggleMenu()" to="/posts">
-              <!-- <i class="fi fi-rs-journal-alt"></i> -->
-              <span>Posts</span>
-          </router-link>
-          <router-link v-if="loggedIn" class="menuItem" @click="toggleMenu()" to="/cursos">
-              <!-- <i class="fi fi-rs-list-check"></i> -->
-              <span>Cursos</span>
-          </router-link>
-          <!--  <router-link v-if="loggedIn" class="menuItem" @click="toggleMenu()" to="/historicos">
-              <i class="fi fi-rs-list-check"></i> Historicos
-          </router-link>
-          <router-link v-if="loggedIn" class="menuItem" @click="toggleMenu()" to="/habitTracker">
-              <i class="fi fi-rs-brightness"></i> Habit Tracker
-          </router-link>
-          <router-link v-if="loggedIn" class="menuItem" @click="toggleMenu()" to="/habitTrackerMensal">
-              <i class="fi fi-rs-brightness"></i> habitTrackerMensal
-          </router-link>
-          <router-link v-if="loggedIn" class="menuItem" @click="toggleMenu()" to="/inspiracao">
-            <i class="fi fi-sr-circle-1"></i> Inspiração
-          </router-link> -->
-          <router-link v-if="loggedIn" class="menuItem" @click="toggleMenu()" to="/backup">
-              <i class="fi fi-rs-disk"></i> Backup
-          </router-link>
-          <router-link v-if="loggedIn" class="menuItem" @click="toggleMenu()" to="/invitations">
-              <i class="fi fi-rs-file-user"></i> Convites
-          </router-link>
-          <!-- <router-link v-if="loggedIn" class="menuItem" @click="toggleMenu()" to="/configuracoes">
-              <i class="fi fi-rs-gears"></i> Configurações
-          </router-link> -->
-          <span class="menuItem" v-if="loggedIn" @click="logout()"><i class="fi fi-rs-sign-out-alt"></i> Logout</span>
+          <!-- <span class="leftNavText my-15">Olá, usuario!</span> -->
+          <div class="flex justify-spacebetween flex-grow-1">
+            <div>
+              <router-link v-if="loggedIn" class="menuItem" @click="toggleMenu()" to="/posts">
+                  <!-- <i class="fi fi-rs-journal-alt"></i> -->
+                  <span>Posts</span>
+              </router-link>
+              <router-link v-if="loggedIn" class="menuItem" @click="toggleMenu()" to="/cursos">
+                  <!-- <i class="fi fi-rs-list-check"></i> -->
+                  <span>Cursos</span>
+              </router-link>
+              <router-link v-if="loggedIn" class="menuItem" @click="toggleMenu()" to="/backup">
+                  <!-- <i class="fi fi-rs-disk"></i> -->
+                  Backup
+              </router-link>
+              <router-link v-if="loggedIn" class="menuItem" @click="toggleMenu()" to="/invitations">
+                  <!-- <i class="fi fi-rs-file-user"></i> -->
+                  Convites
+              </router-link>
+            </div>
+            <div>
+              <span class="menuItem mr-10" v-if="loggedIn" @click="logout()">
+                <!-- <i class="fi fi-rs-sign-out-alt"></i> -->
+                Logout
+              </span>
+            </div>
+          </div>
         </nav>
 
         <div class="mainPageDiv mainBackground">

@@ -42,7 +42,7 @@
           <div class="flex alignitens-center">
             <h1>Bem-vindo de volta, mentorado!</h1>
             <div>
-              <router-link to='/posts/criar' class="btn ml-15 flex-center-combo" style="line-height: 0; display: inline-flex;">
+              <router-link v-if="isAdmin" to='/posts/criar' class="btn ml-15 flex-center-combo" style="line-height: 0; display: inline-flex;">
                 <i class="fi fi-rr-plus"></i>
                 <span class="ml-5">Criar Post</span>
               </router-link>
@@ -100,7 +100,8 @@ import InlineLoader from '@/components/InlineLoader.vue';
 import Notifier from '@/components/Notifier.vue';
 import { PostsStorage } from '@/core/storage/PostsStorage.js'
 import { MdHtmlConverter } from '@/core/MdHtmlConverter.js'
-import UrlBuilder from '../../core/urlBuilder';
+import UrlBuilder from '@/core/UrlBuilder';
+import AuthManager from '@/core/AuthManager';
 
 export default {
   name: 'HabitTracker',
@@ -123,6 +124,9 @@ export default {
   computed: {
     isSmallScreen() {
       return this.windowWidth < 800
+    },
+    isAdmin(){
+      return AuthManager.isAdmin();
     },
   },
   methods: {

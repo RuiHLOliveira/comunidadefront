@@ -128,8 +128,7 @@ export default {
                     response.json().then((json) => {
                         if(response.ok) {
                             //REQUEST SUCCESS
-                            AuthManager.storeToken(json.token);
-                            AuthManager.storeRefreshToken(json.refreshToken);
+                            AuthManager.storeAuthData(json);
                             resolve({response,json});
                         } else {
                             //ELSE, THATS A REQUEST ERROR

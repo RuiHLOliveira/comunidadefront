@@ -20,7 +20,7 @@
         <!-- HEADER -->
         <section class="my-5 py-5 px-10 flex justify-spacebetween alignitens-center">
           <div class="flex alignitens-center">
-            <h1>Crie seu post, mentorado!</h1>
+            <h1>{{editMode ? 'Edite' : 'Crie' }} seu post, chefe!</h1>
             <div>
 
               <router-link to='/posts' class="btn ml-15 mr-10 my-5 flex-center-combo" style="display: inline-flex;">
@@ -30,7 +30,8 @@
             </div>
           </div>
           <div>
-            <button class="btn mx-10 my-5" type="button" 
+            <button class="btn mx-10 my-5" type="button"
+              v-if="isAdmin" 
               @click="salvarRascunho(projetoExibir)">
               salvarRascunho
             </button>
@@ -88,6 +89,7 @@ import InlineLoader from '@/components/InlineLoader.vue';
 import Notifier from '@/components/Notifier.vue';
 import BackupProjetos from "@/views/projetos/BackupProjetos.vue";
 import { PostsStorage } from '@/core/storage/PostsStorage.js';
+import AuthManager from '@/core/AuthManager';
 
 export default {
   name: 'Criar',
@@ -127,6 +129,9 @@ export default {
     conteudoHtml() {
       return this.mdToHtml(this.conteudo);
     },
+    isAdmin() {
+      return AuthManager.isAdmin()
+    }
   },
   methods: {
     

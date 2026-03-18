@@ -74,6 +74,7 @@ import InlineLoader from '@/components/InlineLoader.vue';
 import Notifier from '@/components/Notifier.vue';
 import BackupProjetos from "@/views/projetos/BackupProjetos.vue";
 import { CursosStorage } from '@/core/storage/CursosStorage.js';
+import AuthManager from '@/core/AuthManager';
 
 export default {
   name: 'Criar',
@@ -108,6 +109,9 @@ export default {
     conteudoHtml() {
       return this.mdToHtml(this.conteudo);
     },
+    isAdmin() {
+      return AuthManager.isAdmin()
+    }
   },
   methods: {
     

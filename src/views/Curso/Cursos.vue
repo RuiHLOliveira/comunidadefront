@@ -37,14 +37,15 @@
           <div class="flex alignitens-center">
             <h1>Bem-vindo de volta, patrão!</h1>
             <div>
-              <router-link to='/cursos/criar' class="btn ml-15 flex-center-combo" style="line-height: 0; display: inline-flex;">
+              <router-link to='/cursos/criar' v-if="isAdmin"
+                class="btn ml-15 flex-center-combo" style="line-height: 0; display: inline-flex;">
                 <i class="fi fi-rr-plus"></i>
                 <span class="ml-5">Criar Curso</span>
               </router-link>
             </div>
           </div>
           <div>
-            ???
+            lateral
           </div>
         </section>
 
@@ -87,7 +88,8 @@ import InlineLoader from '@/components/InlineLoader.vue';
 import Notifier from '@/components/Notifier.vue';
 import { CursosStorage } from '@/core/storage/CursosStorage.js'
 import { MdHtmlConverter } from '@/core/MdHtmlConverter.js'
-import UrlBuilder from '../../core/urlBuilder';
+import UrlBuilder from '@/core/UrlBuilder';
+import AuthManager from '@/core/AuthManager';
 
 export default {
   name: 'HabitTracker',
@@ -111,6 +113,9 @@ export default {
     isSmallScreen() {
       return this.windowWidth < 800
     },
+    isAdmin() {
+      return AuthManager.isAdmin()
+    }
   },
   methods: {
     

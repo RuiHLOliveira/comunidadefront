@@ -105,10 +105,10 @@
                   </div>
                   <!-- BOTOES DA AULA -->
                   <div>
-                    <button type="button" class="btn btn-sm mr-20" @click="toggleEditarNome()">
+                    <button type="button" class="btn btn-sm mr-20" v-if="isAdmin" @click="toggleEditarNome()">
                       <i class="fi fi-rr-edit"></i> Editar
                     </button>
-                    <button type="button" class="btn btn-sm" @click="toggleCriarFilho()">
+                    <button type="button" class="btn btn-sm" v-if="isAdmin" @click="toggleCriarFilho()">
                       <i class="fi fi-rr-plus"></i> Criar Filho
                     </button>
                   </div>
@@ -123,7 +123,7 @@
                     <button type="button" :disabled="busyAulaEditar" class="btn btn-sm mr-20" @click="toggleEditarNome()">
                       <i class="fi fi-rr-arrow-small-left"></i> Cancelar
                     </button>
-                    <button type="button" :disabled="busyAulaEditar" class="btn btn-sm" @click="salvarEdicaoNomeAula()">
+                    <button type="button" :disabled="busyAulaEditar" class="btn btn-sm"  v-if="isAdmin" @click="salvarEdicaoNomeAula()">
                       <i class="fi fi-rr-disk"></i> Salvar
                     </button>
                   </div>
@@ -169,8 +169,8 @@ import { AulasStorage } from '@/core/storage/AulasStorage.js'
 // import { FilhosStorage } from '@/core/storage/FilhosStorage.js'
 import { ComentariosStorage } from '@/core/storage/ComentariosStorage.js'
 import { MdHtmlConverter } from '@/core/MdHtmlConverter.js'
-import UrlBuilder from '../../core/urlBuilder';
-import urlBuilder from '../../core/urlBuilder';
+import UrlBuilder from '@/core/UrlBuilder';
+import AuthManager from '@/core/AuthManager';
 
 export default {
   name: 'HabitTracker',
@@ -208,6 +208,9 @@ export default {
     isSmallScreen() {
       return this.windowWidth < 800
     },
+    isAdmin() {
+      return AuthManager.isAdmin()
+    }
   },
   methods: {
     
@@ -225,8 +228,8 @@ export default {
     newDatetimeTz(dateString){return DateTime.newDatetimeTz(dateString);},
     isSameYMD(date1, date2){return DateTime.isSameYMD(date1, date2);},
 
-    getCursoUrl() { return urlBuilder.getCursoUrl({'id':this.getIdCurso()}); },
-    getModuloUrl() { return urlBuilder.getModuloUrl({'id':this.getIdModulo(), 'curso': {'id': this.getIdCurso()}}); },
+    getCursoUrl() { return UrlBuilder.getCursoUrl({'id':this.getIdCurso()}); },
+    getModuloUrl() { return UrlBuilder.getModuloUrl({'id':this.getIdModulo(), 'curso': {'id': this.getIdCurso()}}); },
     getAulaUrl(projeto) { return UrlBuilder.getAulaUrl(projeto); },
     
     toggleEditarNome() { this.editarNomeAula = !this.editarNomeAula },

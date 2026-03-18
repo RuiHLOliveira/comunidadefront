@@ -152,7 +152,7 @@
                 <div class="postNome">
                   <h1> {{ post.nome }} </h1>
                   <div>
-                    <router-link :to='getEditPostUrl(post)' class="btn brn-sm flex-center-combo" style="line-height: 0; display: inline-flex;">
+                    <router-link v-if="isAdmin" :to='getEditPostUrl(post)' class="btn brn-sm flex-center-combo" style="line-height: 0; display: inline-flex;">
                       <i class="fi fi-rr-edit"></i>
                       <span class="ml-5">Editar</span>
                     </router-link>
@@ -272,7 +272,8 @@ import Notifier from '@/components/Notifier.vue';
 import { PostsStorage } from '@/core/storage/PostsStorage.js'
 import { ComentariosStorage } from '@/core/storage/ComentariosStorage.js'
 import { MdHtmlConverter } from '@/core/MdHtmlConverter.js'
-import UrlBuilder from '../../core/urlBuilder';
+import UrlBuilder from '@/core/UrlBuilder';
+import AuthManager from '@/core/AuthManager';
 
 export default {
   name: 'HabitTracker',
@@ -302,6 +303,9 @@ export default {
     isSmallScreen() {
       return this.windowWidth < 800
     },
+    isAdmin() {
+      return AuthManager.isAdmin()
+    }
   },
   methods: {
     

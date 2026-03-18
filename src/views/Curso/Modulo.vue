@@ -93,10 +93,10 @@
                   </div>
                   <!-- BOTOES DO CURSO -->
                   <div>
-                    <button type="button" class="btn btn-sm mr-20" @click="toggleEditarNome()">
+                    <button type="button" class="btn btn-sm mr-20" v-if="isAdmin" @click="toggleEditarNome()">
                       <i class="fi fi-rr-edit"></i> Editar
                     </button>
-                    <button type="button" class="btn btn-sm" @click="toggleCriarAula()">
+                    <button type="button" class="btn btn-sm" v-if="isAdmin" @click="toggleCriarAula()">
                       <i class="fi fi-rr-plus"></i> Criar Aula
                     </button>
                   </div>
@@ -110,7 +110,7 @@
                     <button type="button" :disabled="busyModuloEditar" class="btn btn-sm mr-20" @click="toggleEditarNome()">
                       <i class="fi fi-rr-arrow-small-left"></i> Cancelar
                     </button>
-                    <button type="button" :disabled="busyModuloEditar" class="btn btn-sm" @click="salvarEdicaoNomeModulo()">
+                    <button type="button" :disabled="busyModuloEditar" class="btn btn-sm" v-if="isAdmin" @click="salvarEdicaoNomeModulo()">
                       <i class="fi fi-rr-disk"></i> Salvar
                     </button>
                   </div>
@@ -136,7 +136,7 @@
                     <button type="button" :disabled="busyAulaCriar" class="btn btn-sm mr-20" @click="toggleCriarAula()">
                       <i class="fi fi-rr-arrow-small-left"></i> Cancelar
                     </button>
-                    <button type="button" :disabled="busyAulaCriar" class="btn btn-sm" @click="salvarNovoAula()">
+                    <button type="button" :disabled="busyAulaCriar" class="btn btn-sm" v-if="isAdmin" @click="salvarNovoAula()">
                       <i class="fi fi-rr-disk"></i> Salvar
                     </button>
                   </div>
@@ -175,8 +175,8 @@ import { ModulosStorage } from '@/core/storage/ModulosStorage.js'
 import { AulasStorage } from '@/core/storage/AulasStorage.js'
 import { ComentariosStorage } from '@/core/storage/ComentariosStorage.js'
 import { MdHtmlConverter } from '@/core/MdHtmlConverter.js'
-import UrlBuilder from '../../core/urlBuilder';
-import urlBuilder from '../../core/urlBuilder';
+import UrlBuilder from '@/core/UrlBuilder';
+import AuthManager from '@/core/AuthManager';
 
 export default {
   name: 'HabitTracker',
@@ -210,6 +210,9 @@ export default {
     isSmallScreen() {
       return this.windowWidth < 800
     },
+    isAdmin(){
+      return AuthManager.isAdmin();
+    },
   },
   methods: {
     
@@ -227,7 +230,7 @@ export default {
     newDatetimeTz(dateString){return DateTime.newDatetimeTz(dateString);},
     isSameYMD(date1, date2){return DateTime.isSameYMD(date1, date2);},
 
-    getCursoUrl() { return urlBuilder.getCursoUrl({'id':this.getIdCurso()}); },
+    getCursoUrl() { return UrlBuilder.getCursoUrl({'id':this.getIdCurso()}); },
     getModuloUrl(modulo) { return UrlBuilder.getModuloUrl(modulo); },
     getAulaUrl(aula) { console.log('aula get aula url', aula);return UrlBuilder.getAulaUrl(aula); },
 

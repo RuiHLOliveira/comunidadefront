@@ -92,8 +92,7 @@ export default {
       .then(([response, data]) => {
         console.log('data',data);
         this.$refs.notifier.notify('Logado! Redirecionando...')
-        AuthManager.storeToken(data.token);
-        AuthManager.storeRefreshToken(data.refreshToken);
+        AuthManager.storeAuthData(data);
         this.busy = false;
         this.$emit('redirectAfterLogin', [])
       })

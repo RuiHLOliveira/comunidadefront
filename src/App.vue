@@ -41,11 +41,11 @@
                   <!-- <i class="fi fi-rs-list-check"></i> -->
                   <span>Cursos</span>
               </router-link>
-              <router-link v-if="loggedIn" class="menuItem" @click="toggleMenu()" to="/backup">
+              <router-link v-if="loggedIn && isAdmin" class="menuItem" @click="toggleMenu()" to="/backup">
                   <!-- <i class="fi fi-rs-disk"></i> -->
                   Backup
               </router-link>
-              <router-link v-if="loggedIn" class="menuItem" @click="toggleMenu()" to="/invitations">
+              <router-link v-if="loggedIn && isAdmin" class="menuItem" @click="toggleMenu()" to="/invitations">
                   <!-- <i class="fi fi-rs-file-user"></i> -->
                   Convites
               </router-link>
@@ -113,6 +113,9 @@ export default {
     isSmallScreen() {
       return this.windowWidth < 800
     },
+    isAdmin() {
+      return AuthManager.isAdmin()
+    },
   },
   methods: {
     toggleMenu() {
@@ -175,7 +178,7 @@ export default {
 
     async loadConfiguracoesSeLogado(){
       if(this.loggedIn){
-        await this.buscaConfiguracoes();
+        // await this.buscaConfiguracoes();
       }
     },
 

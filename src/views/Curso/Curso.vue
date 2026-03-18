@@ -92,10 +92,10 @@
                   </div>
                   <!-- BOTOES DO CURSO -->
                   <div>
-                    <button type="button" class="btn btn-sm mr-20" @click="toggleEditarNome()">
+                    <button type="button" class="btn btn-sm mr-20" v-if="isAdmin" @click="toggleEditarNome()">
                       <i class="fi fi-rr-edit"></i> Editar
                     </button>
-                    <button type="button" class="btn btn-sm" @click="toggleCriarModulo()">
+                    <button type="button" class="btn btn-sm" v-if="isAdmin" @click="toggleCriarModulo()">
                       <i class="fi fi-rr-plus"></i> Criar Modulo
                     </button>
                   </div>
@@ -109,7 +109,7 @@
                     <button type="button" :disabled="busyCursoEditar" class="btn btn-sm mr-20" @click="toggleEditarNome()">
                       <i class="fi fi-rr-arrow-small-left"></i> Cancelar
                     </button>
-                    <button type="button" :disabled="busyCursoEditar" class="btn btn-sm" @click="salvarEdicaoNomeCurso()">
+                    <button type="button" :disabled="busyCursoEditar" class="btn btn-sm" v-if="isAdmin" @click="salvarEdicaoNomeCurso()">
                       <i class="fi fi-rr-disk"></i> Salvar
                     </button>
                   </div>
@@ -134,7 +134,7 @@
                     <button type="button" :disabled="busyModuloCriar" class="btn btn-sm mr-20" @click="toggleCriarModulo()">
                       <i class="fi fi-rr-arrow-small-left"></i> Cancelar
                     </button>
-                    <button type="button" :disabled="busyModuloCriar" class="btn btn-sm" @click="salvarNovoModulo()">
+                    <button type="button" :disabled="busyModuloCriar" class="btn btn-sm" v-if="isAdmin" @click="salvarNovoModulo()">
                       <i class="fi fi-rr-disk"></i> Salvar
                     </button>
                   </div>
@@ -173,7 +173,8 @@ import { CursosStorage } from '@/core/storage/CursosStorage.js'
 import { ModulosStorage } from '@/core/storage/ModulosStorage.js'
 import { ComentariosStorage } from '@/core/storage/ComentariosStorage.js'
 import { MdHtmlConverter } from '@/core/MdHtmlConverter.js'
-import UrlBuilder from '../../core/urlBuilder';
+import UrlBuilder from '@/core/UrlBuilder';
+import AuthManager from '@/core/AuthManager';
 
 export default {
   name: 'HabitTracker',
@@ -206,6 +207,9 @@ export default {
     isSmallScreen() {
       return this.windowWidth < 800
     },
+    isAdmin() {
+      return AuthManager.isAdmin()
+    }
   },
   methods: {
     

@@ -1,6 +1,38 @@
 import { reactive } from 'vue';
 
 export const MdHtmlConverter = reactive({
+    parseImageOptions(optionsString) {
+      if(optionsString == null || optionsString.trim() === '') return {};
+
+      const options = {};
+      const parts = optionsString.split(',');
+      parts.forEach(part => {
+        const [rawKey, rawValue] = part.split('=');
+        if(rawKey == null || rawValue == null) return;
+        const key = rawKey.trim().toLowerCase();
+        const value = rawValue.trim();
+        if(value === '') return;
+        if(key === 'max-width' || key === 'mw') {
+          options.maxWidth = value;
+        }
+        if(key === 'max-height' || key === 'mh') {
+          options.maxHeight = value;
+        }
+      });
+      return options;
+    },
+
+    buildImageTag(alt, srcWithOptions) {
+      const [rawSrc, rawOptions] = srcWithOptions.split('|');
+      const src = rawSrc.trim();
+      const options = this.parseImageOptions(rawOptions);
+
+      let style = 'display:block;margin-left:auto;margin-right:auto;';
+      if(options.maxWidth != null) style += `max-width:${options.maxWidth};`;
+      if(options.maxHeight != null) style += `max-height:${options.maxHeight};`;
+
+      return `<img class="imgPost" src="${src}" alt="${alt}" style="${style}">`;
+    },
     
     convert(markdown){
       let html = markdown;
@@ -17,7 +49,9 @@ export const MdHtmlConverter = reactive({
       html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
       html = html.replace(/_(.*?)_/g, '<em>$1</em>');
       // Images
-      html = html.replace(/!\[(.*?)\]\((.*?)\)/g, '<img class="imgPost" src="$2" alt="$1">');
+      html = html.replace(/!\[(.*?)\]\((.*?)\)/g, (match, alt, srcWithOptions) => {
+        return this.buildImageTag(alt, srcWithOptions);
+      });
       // Links
       html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
       // Code inline

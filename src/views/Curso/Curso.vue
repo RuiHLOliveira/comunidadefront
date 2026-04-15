@@ -1,14 +1,17 @@
 <style scoped>
 
+/* gemini deixei de usar */
 .breadcrumbs{
   background-color: var(--darkmode-bg-color);
   padding: 5px 5px;
   border-radius: 5px;
 }
+/* gemini deixei de usar */
 .curso {
   background-color: var(--darkmode-bg-color-box);
   padding: 20px;
 }
+/* gemini deixei de usar */
 .cursoNome{
   margin-bottom: 20px;
 }
@@ -28,6 +31,7 @@
   min-width: 10%;
 }
 
+/* gemini deixei de usar */
 .modulo{
   background-color: rgb(14, 14, 14);
   padding: 20px 20px;
@@ -37,26 +41,216 @@
   }
 }
 
+/* NOVAS CLASSES GEMINI - IDENTIDADE MODERN SCHOLAR */
+
+.gemini-page-header {
+  background: linear-gradient(135deg, #18181e 0%, #21212e 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  width: 100%;
+}
+
+.gemini-header-content {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.gemini-course-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.gemini-course-card {
+  background: #262631;
+  border-radius: 12px;
+  padding: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.gemini-course-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #444daf;
+  opacity: 0.6;
+}
+
+.gemini-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.gemini-breadcrumb a {
+  color: #444daf;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.gemini-breadcrumb a:hover {
+  color: #535bc9;
+}
+
+.gemini-course-title-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.gemini-course-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+.gemini-module-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gemini-module-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 20px 24px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.gemini-module-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(68, 77, 175, 0.3);
+  transform: translateX(4px);
+}
+
+.gemini-module-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #e0e0ff;
+}
+
+/* BOTÕES E FORMULÁRIOS */
+
+.gemini-btn-primary {
+  background: #444daf;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.gemini-btn-primary:hover {
+  background: #535bc9;
+  box-shadow: 0 4px 15px rgba(68, 77, 175, 0.4);
+}
+
+.gemini-btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e0e0ff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.gemini-btn-secondary i {
+  background: transparent !important;
+}
+
+.gemini-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.gemini-btn-icon-only {
+  background: rgba(68, 77, 175, 0.1);
+  color: #444daf;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(68, 77, 175, 0.2);
+  text-decoration: none;
+}
+
+.gemini-btn-icon-only:hover {
+  background: #444daf;
+  color: #fff;
+}
+
+.gemini-input-edit {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(68, 77, 175, 0.3);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 12px 0;
+}
+
+.gemini-input-edit:focus {
+  outline: none;
+  border-color: #444daf;
+  box-shadow: 0 0 0 3px rgba(68, 77, 175, 0.2);
+}
+
 </style>
 
 <template>
   <div>
-    <div class="container">
+    <div>
 
-      <div class="py-10 darkmodeBgBlack">
-        <!-- HEADER -->
-        <section class="my-5 py-5 px-10 flex justify-spacebetween alignitens-center">
-          <div class="flex alignitens-center">
-            <h1>Bem vindo de volta, mentorado!</h1>
-          </div>
-          <div>
-            lateral
-          </div>
-        </section>
-
+      <div class="py-10 gemini-page-header">
+        <div class="gemini-header-content">
+          <!-- HEADER -->
+          <section class="my-5 py-5 flex justify-spacebetween alignitens-center">
+            <div class="flex alignitens-center">
+              <h1 style="font-weight: 800; letter-spacing: -0.5px; font-size: 2.2rem;">Bem vindo de volta, mentorado!</h1>
+            </div>
+            <div>
+              <!-- lateral -->
+            </div>
+          </section>
+        </div>
       </div>
 
-      <div>
+      <div class="gemini-course-container">
 
           <div class="my-5 py-5" v-if="busyCursosLoad">
             <InlineLoader
@@ -68,85 +262,67 @@
 
           <div v-if="curso != [] && !busyCursosLoad">
             <section>
-              <div class="curso flex-column">
-                <div class="mb-20">
-                  <span class="breadcrumbs">
-                    <router-link to='/cursos'>Cursos</router-link>
-                    >
-                    {{ curso.nome }}
-                  </span>
+              <div class="gemini-course-card">
+                <div class="gemini-breadcrumb">
+                  <router-link to='/cursos'>Cursos</router-link>
+                  <i class="fi fi-rr-angle-small-right" style="font-size: 12px; margin-top: 2px;"></i>
+                  <span>{{ curso.nome }}</span>
                 </div>
 
-                <div class="cursoNome flex justify-spacebetween alignitens-center" v-if="!editarNomeCurso">
-                  <!-- NOME DO CURSO -->
-                  <div class="flex alignitens-center">
-                    <!-- <div>
-                      <router-link to='/cursos' class="btn btn-sm mr-10 my-5 flex-center-combo" style="display: inline-flex;">
-                        <i class="fi fi-rr-arrow-small-left"></i>
-                        <span class="ml-5">Voltar</span>
-                      </router-link>
-                    </div> -->
-                    <h1>
-                      {{ curso.nome }}
-                    </h1>
-                  </div>
-                  <!-- BOTOES DO CURSO -->
-                  <div>
-                    <button type="button" class="btn btn-sm mr-20" v-if="isAdmin" @click="toggleEditarNome()">
+                <div class="gemini-course-title-section" v-if="!editarNomeCurso">
+                  <h1 class="gemini-course-title"> {{ curso.nome }} </h1>
+                  <div class="flex">
+                    <button type="button" class="gemini-btn-secondary mr-10" v-if="isAdmin" @click="toggleEditarNome()">
                       <i class="fi fi-rr-edit"></i> Editar
                     </button>
-                    <button type="button" class="btn btn-sm" v-if="isAdmin" @click="toggleCriarModulo()">
+                    <button type="button" class="gemini-btn-primary" v-if="isAdmin" @click="toggleCriarModulo()">
                       <i class="fi fi-rr-plus"></i> Criar Modulo
                     </button>
                   </div>
                 </div>
 
                 <!-- EDIÇÃO DO NOME DO CURSO -->
-                <div class="cursoNomeEdicao" v-if="editarNomeCurso">
-                  Editar nome do Curso:
-                  <input type="text" name="" id="" v-model="curso.nome" :disabled="busyCursoEditar">
-                  <div class="mt-20">
-                    <button type="button" :disabled="busyCursoEditar" class="btn btn-sm mr-20" @click="toggleEditarNome()">
-                      <i class="fi fi-rr-arrow-small-left"></i> Cancelar
+                <div class="cursoNomeEdicao mb-32" v-if="editarNomeCurso">
+                  <span style="font-weight: 600; color: #888;">Editar nome do Curso:</span>
+                  <input type="text" class="gemini-input-edit" v-model="curso.nome" :disabled="busyCursoEditar">
+                  <div class="flex mt-10">
+                    <button type="button" :disabled="busyCursoEditar" class="gemini-btn-secondary mr-10" @click="toggleEditarNome()">
+                      <i class="fi fi-rr-cross-small"></i> Cancelar
                     </button>
-                    <button type="button" :disabled="busyCursoEditar" class="btn btn-sm" v-if="isAdmin" @click="salvarEdicaoNomeCurso()">
+                    <button type="button" :disabled="busyCursoEditar" class="gemini-btn-primary" v-if="isAdmin" @click="salvarEdicaoNomeCurso()">
                       <i class="fi fi-rr-disk"></i> Salvar
                     </button>
                   </div>
+                </div>
+
+                <!-- CRIAR MODULO -->
+                <div v-if="criarModulo" class="mb-32 p-20" style="background: rgba(68, 77, 175, 0.05); border-radius: 12px; border: 1px dashed rgba(68, 77, 175, 0.3);">
+                  <span style="font-weight: 600; color: #888;">Nome do Novo Módulo:</span>
+                  <input type="text" class="gemini-input-edit" v-model="nomeNovoModulo" :disabled="busyModuloCriar">
+                  <div class="flex mt-10">
+                    <button type="button" :disabled="busyModuloCriar" class="gemini-btn-secondary mr-10" @click="toggleCriarModulo()">
+                      <i class="fi fi-rr-cross-small"></i> Cancelar
+                    </button>
+                    <button type="button" :disabled="busyModuloCriar" class="gemini-btn-primary" v-if="isAdmin" @click="salvarNovoModulo()">
+                      <i class="fi fi-rr-disk"></i> Criar Módulo
+                    </button>
+                  </div>
+                </div>
+
+                <div class="my-5" v-if="busyModuloCriar || busyModulosLoad || busyCursoEditar">
                   <InlineLoader
                     :textoAguarde="true"
-                    :busy="busyCursoEditar"
+                    :busy="true"
                     :center="true">
                   </InlineLoader>
                 </div>
 
-                <InlineLoader
-                  :textoAguarde="true"
-                  :busy="busyModuloCriar || busyModulosLoad"
-                  :center="true">
-                </InlineLoader>
-
-                <!-- CRIAR MODULO -->
-                <div v-if="criarModulo">
-                  Nome do Módulo: 
-                  <input type="text" name="" id="" v-model="nomeNovoModulo" :disabled="busyModuloCriar">
-                  <div class="mt-10">
-                    <button type="button" :disabled="busyModuloCriar" class="btn btn-sm mr-20" @click="toggleCriarModulo()">
-                      <i class="fi fi-rr-arrow-small-left"></i> Cancelar
-                    </button>
-                    <button type="button" :disabled="busyModuloCriar" class="btn btn-sm" v-if="isAdmin" @click="salvarNovoModulo()">
-                      <i class="fi fi-rr-disk"></i> Salvar
-                    </button>
-                  </div>
-                </div>
-
-                <div class="mt-20" v-if="modulos != []">
-                  <div v-for="modulo in modulos" class="modulo flex justify-spacebetween alignitens-center">
-                    <div class="nomeModulo">
+                <div class="gemini-module-list" v-if="modulos != []">
+                  <div v-for="modulo in modulos" class="gemini-module-item">
+                    <div class="gemini-module-name">
                       {{ modulo.nome }}
                     </div>
-                    <router-link :to='getModuloUrl(modulo)' class="btn ml-15 flex-center-combo"
-                      style="line-height: 0; display: inline-flex;">
+                    <router-link :to='getModuloUrl(modulo)' class="gemini-btn-icon-only">
                       <i class="fi fi-rr-folder-open"></i>
                     </router-link>
                   </div>
@@ -155,8 +331,6 @@
             </section>
           </div>
       </div>
-
-
   </div>
 
     <Notifier ref="notifier"></Notifier>
@@ -173,8 +347,8 @@ import { CursosStorage } from '@/core/storage/CursosStorage.js'
 import { ModulosStorage } from '@/core/storage/ModulosStorage.js'
 import { ComentariosStorage } from '@/core/storage/ComentariosStorage.js'
 import { MdHtmlConverter } from '@/core/MdHtmlConverter.js'
-import UrlBuilder from '@/core/UrlBuilder';
-import AuthManager from '@/core/AuthManager';
+import UrlBuilder from '@/core/urlBuilder.js';
+import AuthManager from '@/core/AuthManager.js';
 
 export default {
   name: 'HabitTracker',
@@ -271,7 +445,6 @@ export default {
       .then(([response, data]) => {
         const idCurso = this.$route.params.idCurso
         data = data.filter(c => {return c.id == idCurso});
-        console.log({data});
         this.curso = data[0];
         this.buscarModulosDoCurso()
         this.busyCursosLoad = false;
@@ -287,7 +460,6 @@ export default {
       this.busyModulosLoad = true;
       ModulosStorage.index(this.curso.id)
       .then(([response, data]) => {
-        console.log({data});
         this.modulos = data;
         this.busyModulosLoad = false;
       })

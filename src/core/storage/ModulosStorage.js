@@ -9,13 +9,13 @@ export const ModulosStorage = reactive({
     forceNextReload: [],
 
     debugReloadParams(name, idCurso){
-        console.log(`[${name}] modulos`,this.modulos)
+        // console.log(`[${name}] modulos`,this.modulos)
         if(this.modulos[idCurso]){
-            console.log(`[modulo] modulos idCurso`,this.modulos[idCurso])
+            // console.log(`[modulo] modulos idCurso`,this.modulos[idCurso])
         }
-        console.log(`[modulo] forceNextReload`, this.forceNextReload)
+        // console.log(`[modulo] forceNextReload`, this.forceNextReload)
         if(this.forceNextReload[idCurso]){
-            console.log(`[modulo] forceNextReload idCurso`, this.forceNextReload[idCurso])
+            // console.log(`[modulo] forceNextReload idCurso`, this.forceNextReload[idCurso])
         }
     },
 
@@ -25,10 +25,10 @@ export const ModulosStorage = reactive({
             const name = 'modulos';
             this.debugReloadParams(name, idCurso);
             if(this.modulos[idCurso] != undefined && this.modulos[idCurso].length > 0 && !this.forceNextReload[idCurso]) {
-                console.log(`[${name}] loadFromCache`)
+                // console.log(`[${name}] loadFromCache`)
                 resolve([null,this.modulos[idCurso]]);
             } else {
-                console.log(`[${name}] loadFromApi`)
+                // console.log(`[${name}] loadFromApi`)
                 this.loadFromApi(idCurso, resolve, reject);
             }
         });

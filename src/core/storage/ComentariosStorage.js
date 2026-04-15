@@ -11,11 +11,11 @@ export const ComentariosStorage = reactive({
     // funcionalidades de storage
     index(idPost){
         return new Promise((resolve, reject) => {
-            console.log('this.forceNextReload',this.forceNextReload[idPost])
+            // console.log('this.forceNextReload',this.forceNextReload[idPost])
             if(this.comentarios[idPost] != undefined && this.comentarios[idPost].length > 0 && !this.forceNextReload[idPost]) {
                 resolve([null,this.comentarios[idPost]]);
             } else {
-                console.log('loadFromApi')
+                // console.log('loadFromApi')
                 this.loadFromApi(idPost, resolve, reject);
             }
         });

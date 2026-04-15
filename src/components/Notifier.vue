@@ -1,5 +1,6 @@
 
 <style>
+/* gemini deixei de usar */
 .modalNotifyContainer {
   /* position: absolute; */
   position: fixed;
@@ -14,6 +15,7 @@
   z-index: 99;
 }
 
+/* gemini deixei de usar */
 .modalNotify {
   border: 2px solid #00000070;
   margin-top: 40px;
@@ -32,26 +34,77 @@
   z-index: 99;
 }
 
-@media only screen and (min-width: 800px) {
-  .modalNotify {
-    margin-top: 20px;
-    margin-right: 20px;
-  }
-}
-
+/* gemini deixei de usar */
 .modalNotify-error {
   background-color: #e78f8f;
+}
+
+/* NOVAS CLASSES GEMINI - IDENTIDADE MODERN SCHOLAR */
+
+.gemini-notifier-wrapper {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.gemini-toast {
+  background: rgba(38, 38, 49, 0.9); /* #262631 com opacidade */
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 16px 24px;
+  width: 320px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  font-weight: 600;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.gemini-toast::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #42b42b; /* Sucesso default */
+}
+
+.gemini-toast-error::before {
+  background: #ff6b6b; /* Erro */
+}
+
+/* Transições */
+.gemini-toast-enter-active, .gemini-toast-leave-active {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.gemini-toast-enter-from {
+  transform: translateX(100%);
+  opacity: 0;
+}
+.gemini-toast-leave-to {
+  transform: translateX(50%);
+  opacity: 0;
 }
 
 </style>
 
 <template>
-  <div>
-    <div v-if="showNotify || debugShow" class="fix" :class="{ modalNotifyContainer : modalMode == true }">
-      <div class="shadow-3" :class="{ modalNotify : modalMode == true, 'modalNotify-error' : error == true }">
+  <div class="gemini-notifier-wrapper">
+    <transition name="gemini-toast">
+      <div v-if="showNotify || debugShow" 
+           class="gemini-toast" 
+           :class="{ 'gemini-toast-error' : error == true }">
         {{ !debugShow ? message : debugMessage }}
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 

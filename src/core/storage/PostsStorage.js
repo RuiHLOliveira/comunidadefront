@@ -11,11 +11,11 @@ export const PostsStorage = reactive({
     // funcionalidades de storage
     index(){
         return new Promise((resolve, reject) => {
-            console.log('this.forceNextReload',this.forceNextReload)
+            // console.log('this.forceNextReload',this.forceNextReload)
             if(this.posts.length > 0 && !this.forceNextReload) {
                 resolve([null,this.posts]);
             } else {
-                console.log('loadFromApi')
+                // console.log('loadFromApi')
                 this.loadFromApi(resolve, reject);
             }
         });
@@ -92,7 +92,6 @@ export const PostsStorage = reactive({
     },
 
     apiCriar(post) {
-        debuggerx
         const url = `${config.serverUrl}/posts`
         const headers = new Headers({'Content-Type': 'application/json'})
         const body = {

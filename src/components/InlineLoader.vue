@@ -11,6 +11,7 @@
   align-items: center;
 } */
 
+/* gemini deixei de usar */
 .inlineLoaderContainerTexto {
   /* margin: 0 auto; */
   /* padding: 10px; */
@@ -29,6 +30,7 @@
   align-items: center;
 }
 
+/* gemini deixei de usar */
 .inlineLoader {
   padding: 0px;
   display: inline-block;
@@ -42,6 +44,34 @@
   animation: spin 2s linear infinite;
 }
 
+/* NOVAS CLASSES GEMINI - IDENTIDADE MODERN SCHOLAR */
+
+.gemini-loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(68, 77, 175, 0.1);
+  border: 1px solid rgba(68, 77, 175, 0.2);
+  padding: 10px 20px;
+  border-radius: 12px;
+  color: #e0e0ff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  backdrop-filter: blur(4px);
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.gemini-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-top: 2px solid #444daf;
+  border-radius: 50%;
+  animation: gemini-spin 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
 .textoAguarde {
   display:inline-block;
 }
@@ -50,15 +80,20 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+@keyframes gemini-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 </style>
 
 <template>
-    <span v-if="busy" :class="{ xcenter : center }">
-      <span v-if="busy" :class="{ inlineLoaderContainerTexto : textoAguarde }">
-        <span class="mr-10" v-if="textoAguarde">
+    <span v-if="busy" :class="{ xcenter : center }" style="display: block;">
+      <span v-if="busy" :class="textoAguarde ? 'gemini-loader-container' : ''">
+        <span v-if="textoAguarde">
           Aguarde...
         </span>
-        <div class="inlineLoader"></div>
+        <div class="gemini-spinner"></div>
       </span>
     </span>
 </template>

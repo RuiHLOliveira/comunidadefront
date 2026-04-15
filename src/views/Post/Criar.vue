@@ -1,13 +1,86 @@
 <style scoped>
 
-.div-half{
-  width:     50%;
-  min-width: 50%;
-  max-width: 50%;
-  border-radius: 5px;
-  border: 1px solid var(--darkmode-border-gray);
-  margin-left: 5px;
-  padding-left: 5px;
+.modern-scholar-form-container {
+  background-color: #262631;
+  padding: 30px;
+  margin-top: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.modern-scholar-form-container::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #3b3b4f;
+}
+
+.modern-scholar-input, .modern-scholar-textarea {
+  width: 100%;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.modern-scholar-input:focus, .modern-scholar-textarea:focus {
+  box-shadow: none;
+}
+
+.modern-scholar-textarea {
+  min-height: 200px;
+  resize: vertical;
+}
+
+/* .modern-scholar-textarea { gemini deixei de usar no editor markdown } */
+.modern-scholar-textarea-editor {
+  min-height: 200px;
+  resize: vertical;
+  background-color: #18181e;
+  color: #e0e0e0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.modern-scholar-textarea-editor::placeholder {
+  color: #8f8fa3;
+}
+
+.modern-scholar-textarea-editor:focus {
+  outline: 2px solid #7da3ce;
+}
+
+/* .flex.gap-20 { gemini classe era inline } */
+.modern-scholar-editor-split {
+  display: flex;
+  gap: 20px;
+}
+
+/* .modern-scholar-textarea e .modern-scholar-textarea-editor { gemini deixei de usar no split 50/50 } */
+.modern-scholar-editor-half {
+  flex: 0 0 calc(50% - 10px);
+  width: calc(50% - 10px);
+  min-width: calc(50% - 10px);
+  max-width: calc(50% - 10px);
+  box-sizing: border-box;
+}
+
+.modern-scholar-label {
+  font-weight: 600;
+}
+
+.modern-scholar-preview-pane {
+  background-color: #18181e;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: #e0e0e0;
+  line-height: 1.6;
 }
 
 </style>
@@ -16,66 +89,51 @@
   <div>
     <div class="container">
 
-      <div class="py-10 div_border_bottom_gray darkmodeBgBlack">
-        <!-- HEADER -->
-        <section class="my-5 py-5 px-10 flex justify-spacebetween alignitens-center">
-          <div class="flex alignitens-center">
-            <h1>{{editMode ? 'Edite' : 'Crie' }} seu post, chefe!</h1>
-            <div>
+      <header class="modern-scholar-header-container">
+        <div class="modern-scholar-header-left">
+          <h2 class="modern-scholar-main-title">{{editMode ? 'Editando Post' : 'Criando Novo Post' }}</h2>
+          <router-link to='/posts' class="modern-scholar-btn-back">
+            <i class="fi fi-rr-arrow-small-left"></i>
+            <span>Voltar</span>
+          </router-link>
+        </div>
+        <button class="modern-scholar-btn-submit" type="button"
+          v-if="isAdmin" 
+          @click="salvarRascunho()">
+          <span>{{ editMode ? 'Atualizar' : 'Salvar' }}</span>
+        </button>
+      </header>
 
-              <router-link to='/posts' class="btn ml-15 mr-10 my-5 flex-center-combo" style="display: inline-flex;">
-                <i class="fi fi-rr-arrow-small-left"></i>
-                <span class="ml-5">Voltar</span>
-              </router-link>
-            </div>
-          </div>
-          <div>
-            <button class="btn mx-10 my-5" type="button"
-              v-if="isAdmin" 
-              @click="salvarRascunho(projetoExibir)">
-              salvarRascunho
-            </button>
-          </div>
-        </section>
-
+      <div class="my-5 py-5" v-if="busyPostsLoad">
+        <InlineLoader :textoAguarde="true" :busy="busyPostsLoad" :center="true"></InlineLoader>
       </div>
 
-      <div>
-        <div class="my-5 py-5" v-if="busyPostsLoad">
-          <InlineLoader
-            :textoAguarde="true"
-            :busy="busyPostsLoad"
-            :center="true">
-          </InlineLoader>
+      <section class="modern-scholar-form-container" v-if="!busyPostsLoad">
+        
+        <label class="modern-scholar-label" for="nome">Título</label>
+        <input class="modern-scholar-input" name="nome" type="text" placeholder="Título" v-model="nome">
+        
+        <label class="modern-scholar-label" for="introducao">
+          Introdução <span style="font-size: 0.8rem; color: #666;">(Esquerda: Markdown / Direita: Render)</span>
+        </label>
+        <div class="modern-scholar-editor-split">
+          <textarea class="modern-scholar-textarea-editor modern-scholar-editor-half" name="introducao" id="introducao" v-model="introducao"></textarea>
+          <div class="modern-scholar-textarea modern-scholar-preview-pane modern-scholar-editor-half" v-html="introducaoHtml"></div>
         </div>
 
-        <section class="pt-20" v-if="!busyPostsLoad">
-
-          <label for="nome">Título:</label>
-          <input name="nome" type="text" placeholder="Título" v-model="nome">
-          
-          <label for="introducao">Introducao</label>
-          <div class="flex">
-            <textarea class="textarea-half" name="introducao" id="introducao" v-model="introducao"></textarea>
-            <div class="div-half" v-html="introducaoHtml"></div>
-          </div>
-
-          <label for="conteudo">Conteúdo/Corpo</label>
-          <div class="flex">
-            <textarea class="textarea-half" name="conteudo" id="conteudo" v-model="conteudo"></textarea>
-            <div class="div-half" v-html="conteudoHtml"></div>
-          </div>
-        </section>
-
-        <div class="my-5 py-5" v-if="busyPostSave">
-          <InlineLoader
-            :textoAguarde="true"
-            :busy="busyPostSave"
-            :center="true">
-          </InlineLoader>
+        <label class="modern-scholar-label" for="conteudo">
+          Conteúdo <span style="font-size: 0.8rem; color: #666;">(Esquerda: Markdown / Direita: Render)</span>
+        </label>
+        <div class="modern-scholar-editor-split">
+          <textarea class="modern-scholar-textarea-editor modern-scholar-editor-half" name="conteudo" id="conteudo" v-model="conteudo"></textarea>
+          <div class="modern-scholar-textarea modern-scholar-preview-pane modern-scholar-editor-half" v-html="conteudoHtml"></div>
         </div>
+      </section>
+
+      <div class="my-5 py-5" v-if="busyPostSave">
+        <InlineLoader :textoAguarde="true" :busy="busyPostSave" :center="true"></InlineLoader>
       </div>
-  </div>
+    </div>
 
     <Notifier ref="notifier"></Notifier>
 
@@ -87,16 +145,15 @@ import DateTime from '@/core/DateTime.js'
 import Loader from '@/components/Loader.vue';
 import InlineLoader from '@/components/InlineLoader.vue';
 import Notifier from '@/components/Notifier.vue';
-import BackupProjetos from "@/views/projetos/BackupProjetos.vue";
 import { PostsStorage } from '@/core/storage/PostsStorage.js';
-import AuthManager from '@/core/AuthManager';
+import { MdHtmlConverter } from '@/core/MdHtmlConverter.js';
+import AuthManager from '@/core/AuthManager.js';
 
 export default {
   name: 'Criar',
   components: {
     Loader,
     InlineLoader,
-    BackupProjetos,
     Notifier,
   },
   inject: ['configuracoes'],
@@ -225,44 +282,7 @@ export default {
 
 
     mdToHtml(markdown) {
-      let html = markdown;
-      // Headers (h1-h6)
-      html = html.replace(/^##### (.*$)/gim, '<h5>$1</h5>');
-      html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>');
-      html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-      html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-      html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
-      // Bold
-      html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-      html = html.replace(/__(.*?)__/g, '<strong>$1</strong>');
-      // Italic
-      html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-      html = html.replace(/_(.*?)_/g, '<em>$1</em>');
-      // Images
-      html = html.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1">');
-      // Links
-      html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
-      // Code inline
-      html = html.replace(/`(.*?)`/g, '<code>$1</code>');
-      // Code blocks
-      html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
-      // Strikethrough
-      html = html.replace(/~~(.*?)~~/g, '<del>$1</del>');
-      // Horizontal rule
-      html = html.replace(/^\-{3,}$/gim, '<hr>');
-      // Line breaks
-      html = html.replace(/\n\n/g, '</p><p>');
-      html = html.replace(/\n/g, '<br>');
-      // Wrap in paragraph
-      html = '<p>' + html + '</p>';
-      // Clean up empty paragraphs
-      html = html.replace(/<p><\/p>/g, '');
-      html = html.replace(/<p>(<h[1-6]>)/g, '$1');
-      html = html.replace(/(<\/h[1-6]>)<\/p>/g, '$1');
-      html = html.replace(/<p>(<hr>)<\/p>/g, '$1');
-      html = html.replace(/<p>(<pre>)/g, '$1');
-      html = html.replace(/(<\/pre>)<\/p>/g, '$1');
-      return html;
+      return MdHtmlConverter.convert(markdown);
     },
 
     // listar posts

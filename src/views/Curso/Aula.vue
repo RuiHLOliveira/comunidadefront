@@ -1,14 +1,17 @@
 <style scoped>
 
+/* gemini deixei de usar */
 .breadcrumbs{
   background-color: var(--darkmode-bg-color);
   padding: 5px 5px;
   border-radius: 5px;
 }
+/* gemini deixei de usar */
 .aula {
   background-color: var(--darkmode-bg-color-box);
   padding: 20px;
 }
+/* gemini deixei de usar */
 .aulaNome{
   margin-bottom: 20px;
 }
@@ -28,6 +31,7 @@
   min-width: 10%;
 }
 
+/* gemini deixei de usar */
 .filho{
   background-color: rgb(14, 14, 14);
   padding: 20px 20px;
@@ -41,28 +45,180 @@
   width: 100%;
   aspect-ratio: 16 / 9; /* Mantém a proporção padrão do YouTube */
   height: auto;
+  border-radius: 8px; /* gemini adicionei arredondamento */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4); /* gemini adicionei sombra no player */
+}
+
+/* NOVAS CLASSES GEMINI - IDENTIDADE MODERN SCHOLAR */
+
+.gemini-page-header {
+  background: linear-gradient(135deg, #18181e 0%, #21212e 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  width: 100%;
+}
+
+.gemini-header-content {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.gemini-lesson-container {
+  max-width: 1100px; /* Um pouco mais largo para o vídeo brilhar */
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.gemini-lesson-card {
+  background: #262631;
+  border-radius: 12px;
+  padding: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.gemini-lesson-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #444daf;
+  opacity: 0.6;
+}
+
+.gemini-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.gemini-breadcrumb a {
+  color: #444daf;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.gemini-breadcrumb a:hover {
+  color: #535bc9;
+}
+
+.gemini-lesson-title-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.gemini-lesson-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+/* BOTÕES E FORMULÁRIOS */
+
+.gemini-btn-primary {
+  background: #444daf;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.gemini-btn-primary:hover {
+  background: #535bc9;
+  box-shadow: 0 4px 15px rgba(68, 77, 175, 0.4);
+}
+
+.gemini-btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e0e0ff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.gemini-btn-secondary i {
+  background: transparent !important;
+}
+
+.gemini-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.gemini-input-edit {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(68, 77, 175, 0.3);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 12px 0;
+}
+
+.gemini-input-edit:focus {
+  outline: none;
+  border-color: #444daf;
+  box-shadow: 0 0 0 3px rgba(68, 77, 175, 0.2);
+}
+
+.gemini-video-wrapper {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 </style>
 
 <template>
   <div>
-    <div class="container">
+    <div>
 
-      <div class="py-10 darkmodeBgBlack">
-        <!-- HEADER -->
-        <section class="my-5 py-5 px-10 flex justify-spacebetween alignitens-center">
-          <div class="flex alignitens-center">
-            <h1>Bem vindo de volta, mentorado!</h1>
-          </div>
-          <div>
-            lateral
-          </div>
-        </section>
-
+      <div class="py-10 gemini-page-header">
+        <div class="gemini-header-content">
+          <!-- HEADER -->
+          <section class="my-5 py-5 flex justify-spacebetween alignitens-center">
+            <div class="flex alignitens-center">
+              <h1 style="font-weight: 800; letter-spacing: -0.5px; font-size: 2.2rem;">Bem vindo de volta, mentorado!</h1>
+            </div>
+            <div>
+              <!-- lateral -->
+            </div>
+          </section>
+        </div>
       </div>
 
-      <div>
+      <div class="gemini-lesson-container">
 
           <div class="my-5 py-5" v-if="busyAulasLoad">
             <InlineLoader
@@ -74,74 +230,63 @@
 
           <div v-if="aula != [] && !busyAulasLoad">
             <section>
-              <div class="aula flex-column">
+              <div class="gemini-lesson-card">
                 
-                <div class="mb-20">
-                  <span class="breadcrumbs">
-                    Cursos
-                    > 
-                    <router-link :to='getCursoUrl()'>
-                      {{ aula.modulo.curso.nome }}
-                    </router-link>
-                    >
-                    <router-link :to='getModuloUrl()'>
-                      {{ aula.modulo.nome }}
-                    </router-link>
-                  </span>
+                <div class="gemini-breadcrumb">
+                  <router-link to='/cursos'>Cursos</router-link>
+                  <i class="fi fi-rr-angle-small-right" style="font-size: 12px; margin-top: 2px;"></i>
+                  <router-link :to='getCursoUrl()'>
+                    {{ aula.modulo.curso.nome }}
+                  </router-link>
+                  <i class="fi fi-rr-angle-small-right" style="font-size: 12px; margin-top: 2px;"></i>
+                  <router-link :to='getModuloUrl()'>
+                    {{ aula.modulo.nome }}
+                  </router-link>
+                  <i class="fi fi-rr-angle-small-right" style="font-size: 12px; margin-top: 2px;"></i>
+                  <span>{{ aula.nome }}</span>
                 </div>
 
-                <div class="aulaNome flex justify-spacebetween alignitens-center" v-if="!editarNomeAula">
-                  <!-- NOME DA AULA -->
-                  <div class="flex alignitens-center">
-                    <!-- <div>
-                      <router-link :to='getModuloUrl()' class="btn btn-sm mr-10 my-5 flex-center-combo" style="display: inline-flex;">
-                        <i class="fi fi-rr-arrow-small-left"></i>
-                        <span class="ml-5">Voltar</span>
-                      </router-link>
-                    </div> -->
-                    <h1>
-                      {{ aula.nome }}
-                    </h1>
-                  </div>
-                  <!-- BOTOES DA AULA -->
-                  <div>
-                    <button type="button" class="btn btn-sm mr-20" v-if="isAdmin" @click="toggleEditarNome()">
+                <div class="gemini-lesson-title-section" v-if="!editarNomeAula">
+                  <h1 class="gemini-lesson-title"> {{ aula.nome }} </h1>
+                  <div class="flex">
+                    <button type="button" class="gemini-btn-secondary mr-10" v-if="isAdmin" @click="toggleEditarNome()">
                       <i class="fi fi-rr-edit"></i> Editar
                     </button>
-                    <button type="button" class="btn btn-sm" v-if="isAdmin" @click="toggleCriarFilho()">
+                    <!-- <button type="button" class="gemini-btn-primary" v-if="isAdmin" @click="toggleCriarFilho()">
                       <i class="fi fi-rr-plus"></i> Criar Filho
-                    </button>
+                    </button> -->
                   </div>
                 </div>
                 
                 <!-- EDIÇÃO DO NOME DA AULA -->
-                <div class="aulaNomeEdicao" v-if="editarNomeAula">
-                  Editar nome do Aula:
-                  <input type="text" name="" id="" v-model="aula.nome" :disabled="busyAulaEditar">
-                  <input type="text" name="" id="" v-model="aula.url" :disabled="busyAulaEditar">
-                  <div v-if="editarNomeAula" class="mt-20">
-                    <button type="button" :disabled="busyAulaEditar" class="btn btn-sm mr-20" @click="toggleEditarNome()">
-                      <i class="fi fi-rr-arrow-small-left"></i> Cancelar
+                <div class="aulaNomeEdicao mb-24" v-if="editarNomeAula">
+                  <div class="mb-15">
+                    <span style="font-weight: 600; color: #888;">Título da Aula:</span>
+                    <input type="text" class="gemini-input-edit" v-model="aula.nome" :disabled="busyAulaEditar">
+                  </div>
+                  <div class="mb-15">
+                    <span style="font-weight: 600; color: #888;">URL da Aula:</span>
+                    <input type="text" class="gemini-input-edit" v-model="aula.url" :disabled="busyAulaEditar">
+                  </div>
+                  <div class="flex mt-10">
+                    <button type="button" :disabled="busyAulaEditar" class="gemini-btn-secondary mr-10" @click="toggleEditarNome()">
+                      <i class="fi fi-rr-cross-small"></i> Cancelar
                     </button>
-                    <button type="button" :disabled="busyAulaEditar" class="btn btn-sm"  v-if="isAdmin" @click="salvarEdicaoNomeAula()">
-                      <i class="fi fi-rr-disk"></i> Salvar
+                    <button type="button" :disabled="busyAulaEditar" class="gemini-btn-primary" v-if="isAdmin" @click="salvarEdicaoNomeAula()">
+                      <i class="fi fi-rr-disk"></i> Salvar Alterações
                     </button>
                   </div>
+                </div>
+
+                <div class="my-5" v-if="busyAulaEditar">
                   <InlineLoader
                     :textoAguarde="true"
-                    :busy="busyAulaEditar"
+                    :busy="true"
                     :center="true">
                   </InlineLoader>
                 </div>
 
-                <InlineLoader
-                  :textoAguarde="true"
-                  :busy="busyFilhoCriar || busyFilhosLoad"
-                  :center="true">
-                </InlineLoader>
-
-                
-                <div class="mt-20">
+                <div class="gemini-video-wrapper mt-20">
                   <iframe class="iframe-aula" :src='aula.url'
                       :title='aula.nome' frameborder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -151,8 +296,6 @@
             </section>
           </div>
       </div>
-
-
   </div>
 
     <Notifier ref="notifier"></Notifier>
@@ -169,8 +312,8 @@ import { AulasStorage } from '@/core/storage/AulasStorage.js'
 // import { FilhosStorage } from '@/core/storage/FilhosStorage.js'
 import { ComentariosStorage } from '@/core/storage/ComentariosStorage.js'
 import { MdHtmlConverter } from '@/core/MdHtmlConverter.js'
-import UrlBuilder from '@/core/UrlBuilder';
-import AuthManager from '@/core/AuthManager';
+import UrlBuilder from '@/core/urlBuilder.js';
+import AuthManager from '@/core/AuthManager.js';
 
 export default {
   name: 'HabitTracker',
@@ -288,7 +431,6 @@ export default {
       .then(([response, data]) => {
         const idAula = this.$route.params.idAula
         data = data.filter(c => {return c.id == idAula});
-        console.log({data});
         this.aula = data[0];
         this.buscarFilhosDoAula()
         this.busyAulasLoad = false;

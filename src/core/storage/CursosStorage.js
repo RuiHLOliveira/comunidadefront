@@ -11,11 +11,11 @@ export const CursosStorage = reactive({
     // funcionalidades de storage
     index(){
         return new Promise((resolve, reject) => {
-            console.log('this.forceNextReload',this.forceNextReload)
+            // console.log('this.forceNextReload',this.forceNextReload)
             if(this.cursos.length > 0 && !this.forceNextReload) {
                 resolve([null,this.cursos]);
             } else {
-                console.log('loadFromApi')
+                // console.log('loadFromApi')
                 this.loadFromApi(resolve, reject);
             }
         });

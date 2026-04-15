@@ -34,11 +34,16 @@ export default {
         return new Promise((resolve, reject) => {
             try {
                 console.log(data);
-                fetch(params.url, {
+                const options = {
                     headers: params.headers,
-                    method: params.method,
-                    body: data,
-                }).then( (response) => {
+                    method: params.method
+                };
+                
+                if (params.method !== 'GET' && params.method !== 'HEAD' && data !== undefined) {
+                    options.body = data;
+                }
+
+                fetch(params.url, options).then( (response) => {
                     //error but authorized
                     if(!response.ok && response.status != 401) {
                         console.log('[Warning] [Error non-401]')

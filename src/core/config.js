@@ -1,5 +1,5 @@
 export default {
-    frontSubfolderUrl: 'comunidadealunos/#',
-    //serverUrl: 'https://sproject-back.onrender.com/api',
-    serverUrl: 'http://localhost/api',
+    frontSubfolderUrl: 'comunidadefront/#',
+    serverUrl: 'https://comunidadeback.onrender.com/api',
+    // serverUrl: 'http://localhost/api',
 };

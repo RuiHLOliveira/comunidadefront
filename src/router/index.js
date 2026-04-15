@@ -2,18 +2,10 @@ import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router
 
 import Login from '../views/Auth/Login.vue'
 import Register from '../views/Auth/Register.vue'
-import Inbox from '../views/inbox/Inbox.vue'
-import PrimeiraPagina from '../views/PrimeiraPagina.vue'
-import ProjetosListV2 from '../views/projetos/ProjetosListV2.vue'
-import Inspiracao from '../views/projetos/Inspiracao.vue'
-import Tarefas from '../views/tarefas/Tarefas.vue'
-import HabitosAntigo from '../views/habitos/HabitosAntigo.vue'
-import HabitosMensal from '../views/habitos/HabitosMensal.vue'
-import Habitos from '../views/habitos/Habitos.vue'
+import Perfil from '../views/Perfil.vue'
 import Invitations from '../views/Invitations.vue'
 import Configuracoes from '../views/Configuracoes.vue'
 import Backup from '../views/Backup.vue'
-import Historicos from '../views/Historicos/Historicos.vue'
 import Posts from '../views/Post/Posts.vue'
 import Post from '../views/Post/Post.vue'
 import Criar from '../views/Post/Criar.vue'
@@ -92,66 +84,6 @@ const router = createRouter({
     },
 
     {
-      path: '/inbox',
-      name: 'Inbox',
-      component: Inbox,
-      props: true
-    },
-    {
-      path: '/primeiraPagina',
-      name: 'PrimeiraPagina',
-      component: PrimeiraPagina,
-      props: true
-    },
-    {
-      path: '/projetosListV2',
-      name: 'ProjetosListV2',
-      component: ProjetosListV2,
-      props: true
-    },
-    {
-      path: '/projetosListV2/projeto/:idProjeto',
-      name: 'Projeto',
-      component: ProjetosListV2,
-      props: true
-    },
-    {
-      path: '/inspiracao',
-      name: 'Inspiracao',
-      component: Inspiracao,
-      props: true
-    },
-    {
-      path: '/tarefas',
-      name: 'Tarefas',
-      component: Tarefas,
-      props: true
-    },
-    {
-      path: '/historicos',
-      name: 'Historicos',
-      component: Historicos,
-      props: true
-    },
-    {
-      path: '/habitTracker',
-      name: 'HabitTracker',
-      component: Habitos,
-      props: true
-    },
-    {
-      path: '/habitTrackerMensal',
-      name: 'HabitTrackerMensal',
-      component: HabitosMensal,
-      props: true
-    },
-    {
-      path: '/editarHabitos',
-      name: 'HabitTrackerAntigo',
-      component: HabitosAntigo,
-      props: true
-    },
-    {
       path: '/',
       name: 'Login',
       component: Login
@@ -165,6 +97,11 @@ const router = createRouter({
       path: '/invitations',
       name: 'Invitations',
       component: Invitations
+    },
+    {
+      path: '/perfil',
+      name: 'Perfil',
+      component: Perfil
     },
     {
       path: '/configuracoes',
